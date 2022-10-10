@@ -1,4 +1,4 @@
-from utils import utils
+from qlitreutils.calculation import utils
 
 
 def test_moving_average():
