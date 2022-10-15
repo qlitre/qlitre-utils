@@ -1,4 +1,4 @@
-from qlitreutils.array import utils
+from src.qlitreutils.array import utils
 
 
 def test_get_connected_value_list():

@@ -1,4 +1,4 @@
-from qlitreutils.sort import utils
+from src.qlitreutils.sort import utils
 
 
 def test_bubble_sort():
