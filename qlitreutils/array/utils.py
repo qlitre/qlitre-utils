@@ -1,4 +1,5 @@
 from typing import List, Tuple
+from collections import deque
 
 
 def get_connected_value_list(a_list: List[Tuple[int, ...]], start_value: int) -> List[int]:
@@ -9,10 +10,10 @@ def get_connected_value_list(a_list: List[Tuple[int, ...]], start_value: int) ->
     :param start_value 最初に調べる値、例えばスタート地点
     :return [1,2,3,6]
     """
-    check_remains = [start_value]
+    check_remains = deque([start_value])
     return_values = []
     while True:
-        check_value = check_remains.pop(0)
+        check_value = check_remains.popleft()
         for item in a_list:
             if check_value not in item:
                 continue

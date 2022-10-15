@@ -45,28 +45,21 @@ def merge_sort(a_list: List) -> List:
         left_i = 0
         right_i = 0
         alist_i = 0
-        # 1回目の場合
-        # left[6] right[3]となる
+
         while left_i < len(left) and right_i < len(right):
-            # 6<=3 のため実行されない
             if left[left_i] <= right[right_i]:
                 a_list[alist_i] = left[left_i]
                 left_i += 1
-            # 実行
             else:
                 a_list[left_i] = right[right_i]
                 right_i += 1
-            # a_list [3]となる
             alist_i += 1
 
-        # このブロックは実行される
         while left_i < len(left):
-            # a_list[3,6]となる
             a_list[alist_i] = left[left_i]
             left_i += 1
             alist_i += 1
 
-        # right_iは１になっているため実行されない
         while right_i < len(right):
             a_list[alist_i] = right[right_i]
             right_i += 1
