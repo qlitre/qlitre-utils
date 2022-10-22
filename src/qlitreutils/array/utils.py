@@ -1,14 +1,15 @@
-from typing import List, Tuple
+from typing import List, Tuple, Union
 from collections import deque
 
 
-def get_connected_value_list(a_list: List[Tuple[int, ...]], start_value: int) -> List[int]:
+def get_connected_value_list(a_list: List[Tuple[Union[int, str], ...]],
+                             start_value: Union[int, str]
+                             ) -> List[Union[int, str]]:
     """
     タプルのリストを受け取り、繋がっている要素をリストにして返す
     例えばある地点からスタートして、どこまでたどり着けるか調べる
     :param a_list ex.[(1, 2), (1, 3), (3, 6), (4, 5)]
     :param start_value 最初に調べる値、例えばスタート地点
-    :return [1,2,3,6]
     """
     check_remains = deque([start_value])
     return_values = []
@@ -24,3 +25,4 @@ def get_connected_value_list(a_list: List[Tuple[int, ...]], start_value: int) ->
         if not check_remains:
             break
     return return_values
+
