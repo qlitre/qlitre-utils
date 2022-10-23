@@ -2,6 +2,7 @@ import string
 
 
 def is_anagram(s1: str, s2: str) -> bool:
+    """アナグラム判定"""
     s1 = s1.replace(' ', '').lower()
     s2 = s2.replace(' ', '').lower()
     if sorted(s1) == sorted(s2):
@@ -10,6 +11,7 @@ def is_anagram(s1: str, s2: str) -> bool:
 
 
 def is_palindrome(s1: str) -> bool:
+    """回文判定"""
     s = s1.lower()
     if s == s[::-1]:
         return True
@@ -17,6 +19,7 @@ def is_palindrome(s1: str) -> bool:
 
 
 def cipher(a_string: str, key: int) -> str:
+    """シーザー暗号を返す。アルファベット限定"""
     # ['ABCD...']
     uppercase = string.ascii_uppercase
     # ['abcd...']
@@ -33,4 +36,3 @@ def cipher(a_string: str, key: int) -> str:
         else:
             encrypt += c
     return encrypt
-
