@@ -26,3 +26,38 @@ def test_get_divisor_list():
     num = 40
     ans = [1, 2, 4, 5, 8, 10, 20, 40]
     assert utils.get_divisor_list(num) == ans
+
+
+def test_get_gcf_simple():
+    a, b = 12, 8
+    assert utils.get_gcf_euclid(a, b) == 4
+
+
+def test_get_gcf_euclid():
+    a, b = 12, 8
+    assert utils.get_gcf_euclid(a, b) == 4
+
+
+def test_get_gcf_using_math():
+    a, b = 12, 8
+    assert utils.get_gcf_euclid(a, b) == 4
+
+
+def test_get_lcm_using_math():
+    a, b = 12, 8
+    assert utils.get_lcm_using_math(a, b) == 24
+
+
+def test_get_lcm_simple():
+    a, b = 12, 8
+    assert utils.get_lcm_using_math(a, b) == 24
+
+
+def test_get_gcf_multiple():
+    numbers = [8, 12, 20]
+    assert utils.get_gcf_multiple(*numbers) == 4
+
+
+def test_get_lcm_multiple():
+    numbers = [8, 12, 20]
+    assert utils.get_lcm_multiple(*numbers) == 120
