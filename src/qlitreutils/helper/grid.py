@@ -1,3 +1,7 @@
+"""
+グリッド問題のヘルパー
+"""
+
 from typing import List
 
 
