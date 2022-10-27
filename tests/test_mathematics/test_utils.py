@@ -14,3 +14,15 @@ def test_base_n_to_base_10():
     assert utils.base_n_to_base_10(num_2, 2) == 8
     num_3 = 101
     assert utils.base_n_to_base_10(num_3, 3) == 10
+
+
+def test_get_divisor_list():
+    num = 6
+    ans = [1, 2, 3, 6]
+    assert utils.get_divisor_list(num) == ans
+    num = 1
+    ans = [1]
+    assert utils.get_divisor_list(num) == ans
+    num = 40
+    ans = [1, 2, 4, 5, 8, 10, 20, 40]
+    assert utils.get_divisor_list(num) == ans

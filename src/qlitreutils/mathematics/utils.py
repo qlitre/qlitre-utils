@@ -18,3 +18,22 @@ def base_n_to_base_10(num_n: int, n: int) -> int:
         num_10 = num_10 * n
         num_10 += int(s)
     return num_10
+
+
+def get_divisor_list(num: int) -> list:
+    """約数のリストを返す"""
+    if num == 1:
+        return [1]
+    divisors = []
+    # 平方根
+    max_num = int(pow(num, 0.5)) + 1
+
+    for n in range(1, max_num):
+        if num % n == 0:
+            divisors.append(n)
+            div = num // n
+            if div != n:
+                divisors.append(div)
+
+    divisors.sort()
+    return divisors
