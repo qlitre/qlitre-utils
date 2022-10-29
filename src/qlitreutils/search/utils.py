@@ -1,8 +1,7 @@
 from bisect import bisect_left
-from typing import List
 
 
-def get_nearest_value_in_list(an_iterable: List[int], target: int) -> int:
+def get_nearest_value_in_list(an_iterable: list, target: int) -> int:
     """リストの中から最も近い値を探索して返す"""
     an_iterable.sort()
     index = bisect_left(an_iterable, target)

@@ -2,13 +2,14 @@
 グリッド問題のヘルパー
 """
 
-from typing import List
-
 
 class Grid:
     """グリッドクラス"""
 
-    def __init__(self, data: List[List]):
+    def __init__(self, data: list):
+        """
+        :param data: 二次元リスト
+        """
         self.data = data
         self.height = self.get_height()
         self.width = self.get_width()

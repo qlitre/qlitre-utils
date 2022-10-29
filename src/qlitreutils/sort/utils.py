@@ -1,7 +1,4 @@
-from typing import List
-
-
-def bubble_sort(a_list: List) -> List:
+def bubble_sort(a_list: list) -> list:
     """バブルソート"""
     loop_size = len(a_list) - 1
     for i in range(loop_size):
@@ -15,7 +12,7 @@ def bubble_sort(a_list: List) -> List:
     return a_list
 
 
-def insertion_sort(a_list: List) -> List:
+def insertion_sort(a_list: list) -> list:
     """挿入ソート"""
     for i in range(1, len(a_list)):
         # 値を保持
@@ -31,7 +28,7 @@ def insertion_sort(a_list: List) -> List:
     return a_list
 
 
-def merge_sort(a_list: List) -> List:
+def merge_sort(a_list: list) -> list:
     """マージソート"""
     if len(a_list) > 1:
         # 再帰的に分割
