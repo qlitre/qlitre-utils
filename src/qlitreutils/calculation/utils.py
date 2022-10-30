@@ -1,4 +1,6 @@
+import typing
 from collections import deque
+import itertools
 
 
 def moving_average(a_list: list, n: int) -> list:
@@ -43,3 +45,19 @@ def get_sum_of_product_pairs(numbers: list) -> int:
         return_val += num * remain_total
 
     return return_val
+
+
+def generate_accumulate_in_section(a_list: list, section_length: int) -> typing.Iterable:
+    """
+    数列の特定の区間の累積和をyieldして返す
+    ex.
+    a_list=[1,2,3,4,5] section_length=3 => [6,9,12]
+    """
+    a_list_accumulated = list(itertools.accumulate(a_list))
+    for i, number in enumerate(a_list_accumulated):
+        if i < section_length - 1:
+            continue
+        if i == section_length - 1:
+            yield number
+        else:
+            yield number - a_list_accumulated[i - section_length]

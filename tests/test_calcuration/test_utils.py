@@ -18,3 +18,15 @@ def test_get_sum_of_product_pairs():
     assert utils.get_sum_of_product_pairs(numbers) == 11
     numbers = [1, 3, 5]
     assert utils.get_sum_of_product_pairs(numbers) == 23
+
+
+def test_generate_accumulate_in_section():
+    a_list = [1, 2, 3, 4, 5]
+    section_length = 3
+    ret_list = [val for val in utils.generate_accumulate_in_section(a_list, section_length)]
+    assert ret_list == [6, 9, 12]
+    a_list = [1, 2, 3, 4, 5]
+    section_length = 4
+    ret_list = [val for val in utils.generate_accumulate_in_section(a_list, section_length)]
+    assert ret_list == [10, 14]
+
