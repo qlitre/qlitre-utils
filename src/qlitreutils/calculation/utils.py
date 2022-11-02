@@ -61,3 +61,25 @@ def generate_accumulate_in_section(a_list: list, section_length: int) -> typing.
             yield number
         else:
             yield number - a_list_accumulated[i - section_length]
+
+
+def get_all_sum_pair_in_list(a_list: list, target: int) -> list:
+    """
+    リストを受け取り足してtargetになる組み合わせを返す
+    """
+
+    def helper(start_index, check_list, ret_list, _target):
+        sum_value = sum(check_list)
+        if sum_value == _target:
+            ret_list.append(check_list)
+            return ret_list
+        elif sum_value > _target:
+            return
+        for u in range(start_index, len(a_list)):
+            if a_list[u] > _target:
+                continue
+            # 再帰的に呼び出す
+            helper((u + 1), check_list + [a_list[u]], ret_list, _target)
+        return ret_list
+
+    return helper(0, [], [], target)

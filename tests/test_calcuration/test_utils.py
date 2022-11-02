@@ -30,3 +30,10 @@ def test_generate_accumulate_in_section():
     ret_list = [val for val in utils.generate_accumulate_in_section(a_list, section_length)]
     assert ret_list == [10, 14]
 
+
+def test_get_all_sum_pair_in_list():
+    a_list = [1, 2, 3, 4, 5]
+    target = 5
+    ret = utils.get_all_sum_pair_in_list(a_list, target)
+    assert [1, 4] in ret
+    assert [2, 3] in ret
