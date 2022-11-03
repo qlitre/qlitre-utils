@@ -24,6 +24,52 @@ def get_connected_value_list(a_list: list, start_value) -> list:
     return return_values
 
 
+def count_can_visit(start, connected: dict, include_start: bool = False) -> int:
+    """
+    ある地点を起点に訪れることのできる場所の数を返す
+    :param start:開始する数値、connectedのキーを指定
+    :param connected:{0:[1,3,4],1:[2,3,4]...}
+    :param include_start:開始地点を数に含めるか
+    """
+    checked = set()
+    checked.add(start)
+    cnt = 1 if include_start else 0
+    que = deque()
+    que.append(start)
+    while que:
+        now_place = que.popleft()
+        for to_place in connected[now_place]:
+            if to_place in checked:
+                continue
+            cnt += 1
+            que.append(to_place)
+            checked.add(to_place)
+    return cnt
+
+
+def get_can_visit(start, connected: dict, include_start: bool = False) -> list:
+    """
+    ある地点を起点に訪れることのできる場所をリストにして返す
+    :param start:開始する数値、connectedのキーを指定
+    :param connected:{0:[1,3,4],1:[2,3,4]...}
+    :param include_start:開始地点を数に含めるか
+    """
+    checked = set()
+    checked.add(start)
+    ret = [start] if include_start else []
+    que = deque()
+    que.append(start)
+    while que:
+        now_place = que.popleft()
+        for to_place in connected[now_place]:
+            if to_place in checked:
+                continue
+            ret.append(to_place)
+            que.append(to_place)
+            checked.add(to_place)
+    return ret
+
+
 def move_zeros_deque(a_list: list):
     """数列の0を右に寄せる　deque版"""
     ret = deque()
