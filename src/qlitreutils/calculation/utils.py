@@ -47,7 +47,7 @@ def get_sum_of_product_pairs(numbers: list) -> int:
     return return_val
 
 
-def generate_accumulate_in_section(a_list: list, section_length: int) -> typing.Iterable:
+def generate_accumulate_in_section(a_list: list, section_length: int):
     """
     数列の特定の区間の累積和をyieldして返す
     ex.

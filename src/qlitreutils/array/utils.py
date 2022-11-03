@@ -22,3 +22,27 @@ def get_connected_value_list(a_list: list, start_value) -> list:
         if not check_remains:
             break
     return return_values
+
+
+def move_zeros_deque(a_list: list):
+    """数列の0を右に寄せる　deque版"""
+    ret = deque()
+    for item in reversed(a_list):
+        if item == 0:
+            ret.append(0)
+        else:
+            ret.appendleft(item)
+
+    return list(ret)
+
+
+def move_zeros_basic(a_list):
+    """数列の0を右に寄せる　標準版"""
+    zero_index = 0
+    for index, n in enumerate(a_list):
+        if n != 0:
+            a_list[zero_index] = n
+            if zero_index != index:
+                a_list[index] = 0
+            zero_index += 1
+    return a_list
