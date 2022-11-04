@@ -1,3 +1,7 @@
+"""
+配列操作のユーティリティ
+"""
+
 from collections import deque
 
 

@@ -1,4 +1,6 @@
-import typing
+"""
+計算ユーティリティ
+"""
 from collections import deque
 import itertools
 

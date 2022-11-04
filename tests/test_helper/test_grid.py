@@ -15,3 +15,15 @@ def test_grid():
     assert my_grid.look_left(pos_row, pos_col) == 'l'
     assert my_grid.look_right(pos_row, pos_col) == 'n'
     assert my_grid.look_bottom(pos_row, pos_col) == 'r'
+    data = [list("...#..."),
+            list("#.....#"),
+            list("#....##"),
+            list("#.....#"),
+            list("...#...")]
+    my_grid = grid.Grid(data)
+    pos_row = 2
+    pos_col = 3
+    assert my_grid.look_through_bottom(pos_row, pos_col, obstacle='#') == ['.']
+    assert my_grid.look_through_top(pos_row, pos_col, obstacle='#') == ['.']
+    assert my_grid.look_through_right(pos_row, pos_col, obstacle='#') == ['.']
+    assert my_grid.look_through_left(pos_row, pos_col, obstacle='#') == ['.', '.']
