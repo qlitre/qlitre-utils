@@ -61,3 +61,12 @@ def test_get_gcf_multiple():
 def test_get_lcm_multiple():
     numbers = [8, 12, 20]
     assert utils.get_lcm_multiple(*numbers) == 120
+
+
+def test_prime_factorize():
+    ret = utils.prime_factorize(24)
+    assert ret == [2, 2, 2, 3]
+    ret = utils.prime_factorize(1)
+    assert ret == [1]
+    ret = utils.prime_factorize(13)
+    assert ret == [13]
