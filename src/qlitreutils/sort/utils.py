@@ -1,3 +1,7 @@
+from bisect import bisect_left
+from collections import deque
+
+
 def bubble_sort(a_list: list) -> list:
     """バブルソート"""
     loop_size = len(a_list) - 1
@@ -62,3 +66,73 @@ def merge_sort(a_list: list) -> list:
             right_i += 1
             alist_i += 1
     return a_list
+
+
+def get_before_in_sorted_permutation(a_list: list) -> list:
+    """順列で並び替えた際の一つ前の配列を返す"""
+    ret = []
+    tmp = deque()
+
+    first = True
+    min_val = 0
+    for i, val in enumerate(reversed(a_list)):
+        if first:
+            min_val = val
+            tmp.appendleft(val)
+            first = False
+            continue
+        if val <= min_val:
+            min_val = val
+            tmp.appendleft(val)
+        else:
+            tmp = list(tmp)
+            sorted_tmp = sorted(tmp)
+            index = bisect_left(sorted_tmp, val) - 1
+            changed_val = sorted_tmp[index]
+            change_index = tmp.index(changed_val)
+            tmp[change_index] = val
+            tmp.sort(reverse=True)
+            tmp = [changed_val] + tmp
+            remain = len(a_list) - 1 - i
+            ret = a_list[:remain] + tmp
+            break
+
+    if not ret:
+        return a_list
+    else:
+        return ret
+
+
+def get_after_in_sorted_permutation(a_list: list) -> list:
+    """順列で並び替えた際の一つ後ろの配列を返す"""
+    ret = []
+    tmp = deque()
+
+    first = True
+    max_val = 0
+    for i, val in enumerate(reversed(a_list)):
+        if first:
+            max_val = val
+            tmp.appendleft(val)
+            first = False
+            continue
+        if val >= max_val:
+            max_val = val
+            tmp.appendleft(val)
+        else:
+            tmp = list(tmp)
+            sorted_tmp = sorted(tmp)
+            index = bisect_left(sorted_tmp, val)
+            changed_val = sorted_tmp[index]
+            change_index = tmp.index(changed_val)
+            tmp[change_index] = val
+            tmp.sort()
+            tmp = [changed_val] + tmp
+            remain = len(a_list) - 1 - i
+            ret = a_list[:remain] + tmp
+            break
+
+    if not ret:
+        return a_list
+    else:
+        return ret
