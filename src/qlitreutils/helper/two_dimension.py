@@ -2,6 +2,8 @@
 二次元平面問題のヘルパー
 """
 import itertools
+import math
+from math import cos, sin
 
 
 def is_three_points_on_same_line(x1, y1, x2, y2, x3, y3) -> bool:
@@ -63,3 +65,23 @@ def get_square_point(point1: tuple, point2: tuple):
     y3 = y2 - dx
     y4 = y3 + dy
     return (x3, y3), (x4, y4)
+
+
+def get_center_point(point1: tuple, point2: tuple) -> tuple:
+    """2点の中心点を返す"""
+    x1, y1 = point1[0], point1[1]
+    x2, y2 = point2[0], point2[1]
+    cx = (x1 + x2) / 2
+    cy = (y1 + y2) / 2
+    return tuple([cx, cy])
+
+
+def get_rotate_point(point: tuple, degree: float):
+    """
+    (x,y)  を原点中心に反時計回りに θ 回転させた点の座標を返す
+    """
+    x, y = point[0], point[1]
+    radian = math.radians(degree)
+    x1 = cos(radian) * x - sin(radian) * y
+    y1 = sin(radian) * x + cos(radian) * y
+    return tuple([x1, y1])

@@ -56,3 +56,18 @@ def test_get_square_point():
     p3, p4 = two_dimension.get_square_point(p1, p2)
     assert p3 == (1, 0)
     assert p4 == (0, 2)
+
+
+def test_get_center_point():
+    point_1 = (1, 2)
+    point_2 = (3, 4)
+    ret = two_dimension.get_center_point(point_1, point_2)
+    assert ret == (2, 3)
+
+
+def get_rotate_point():
+    point = (-0.5, -0.5)
+    degree = 90
+    ret = two_dimension.get_rotate_point(point, degree)
+    assert ret[0] == 2
+    assert ret[1] == 1
