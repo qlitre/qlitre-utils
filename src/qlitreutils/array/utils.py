@@ -2,30 +2,34 @@
 配列操作のユーティリティ
 """
 
-from collections import deque
+from collections import deque, defaultdict
 
 
 def get_connected_value_list(a_list: list, start_value) -> list:
     """
     タプルのリストを受け取り、繋がっている要素をリストにして返す
     例えばある地点からスタートして、どこまでたどり着けるか調べる
+    warning:割と速度に不安がある。技術試験などでは辞書かして、get_can_visitを使った方がよい
     :param a_list ex.[(1, 2), (1, 3), (3, 6), (4, 5)]
     :param start_value 最初に調べる値、例えばスタート地点
     """
-    check_remains = deque([start_value])
-    return_values = []
-    while True:
-        check_value = check_remains.popleft()
+    ret = [start_value]
+    checked = set()
+    checked.add(start_value)
+    que = deque([start_value])
+    while que:
+        check_val = que.popleft()
         for item in a_list:
-            if check_value not in item:
+            if check_val not in item:
                 continue
             for elm in item:
-                if elm not in return_values:
-                    return_values.append(elm)
-                    check_remains.append(elm)
-        if not check_remains:
-            break
-    return return_values
+                if elm in checked:
+                    continue
+                else:
+                    ret.append(elm)
+                    que.append(elm)
+                    checked.add(elm)
+    return ret
 
 
 def count_can_visit(start, connected: dict, include_start: bool = False) -> int:
@@ -57,6 +61,7 @@ def get_can_visit(start, connected: dict, include_start: bool = False) -> list:
     :param start:開始する数値、connectedのキーを指定
     :param connected:{0:[1,3,4],1:[2,3,4]...}
     :param include_start:開始地点を数に含めるか
+
     """
     checked = set()
     checked.add(start)
