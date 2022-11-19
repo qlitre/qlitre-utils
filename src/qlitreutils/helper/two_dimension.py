@@ -85,3 +85,19 @@ def get_rotate_point(point: tuple, degree: float):
     x1 = cos(radian) * x - sin(radian) * y
     y1 = sin(radian) * x + cos(radian) * y
     return tuple([x1, y1])
+
+
+def get_max_manhattan_distance(points: list) -> int:
+    """
+    座標リストを受け取り最大のマンハッタン距離を返す
+    """
+    x_conv = []
+    y_conv = []
+
+    for x, y in points:
+        x_conv.append(x + y)
+        y_conv.append(x - y)
+    x_dist_max = abs(max(x_conv) - min(x_conv))
+    y_dist_max = abs(max(y_conv) - min(y_conv))
+
+    return max(x_dist_max, y_dist_max)

@@ -71,3 +71,13 @@ def get_rotate_point():
     ret = two_dimension.get_rotate_point(point, degree)
     assert ret[0] == 2
     assert ret[1] == 1
+
+
+def test_get_max_manhattan_distance():
+    points = [
+        [1, 1],
+        [2, 4],
+        [3, 2]
+    ]
+    dist = two_dimension.get_max_manhattan_distance(points)
+    assert dist == 4
