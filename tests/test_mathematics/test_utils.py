@@ -70,3 +70,8 @@ def test_prime_factorize():
     assert ret == [1]
     ret = utils.prime_factorize(13)
     assert ret == [13]
+
+
+def test_n_combi_r_using_mod():
+    assert utils.n_combi_r_using_mod(5, 2, 10 ** 9 + 7) == 10
+    assert utils.n_combi_r_using_mod(5, 2, 7) == 3

@@ -130,3 +130,19 @@ def prime_factorize(n: int) -> list:
     if n != 1:
         ret.append(n)
     return ret
+
+
+def n_combi_r_using_mod(n, r, mod):
+    # 分子
+    numerator = 1
+    for i in range(n - r + 1, n + 1):
+        numerator *= i
+        numerator %= mod
+    # 分母　r の階乗
+    denominator = 1
+    for i in range(1, r + 1):
+        denominator *= i
+        denominator %= mod
+    # 分母の逆元
+    denominator_inverse_element = pow(denominator, -1, mod)
+    return numerator * denominator_inverse_element % mod
