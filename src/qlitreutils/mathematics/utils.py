@@ -132,6 +132,29 @@ def prime_factorize(n: int) -> list:
     return ret
 
 
+def generate_primes_fast(numbers: list):
+    """数字のリストを受け取り素因数分解リストをyieldして返す"""
+    max_val = max(numbers)
+    data = [0] * (max_val + 1)
+    for i in range(2, max_val + 1):
+        if data[i] != 0:
+            continue
+        for k in range(1, max_val + 1):
+            if i * k < max_val + 1:
+                if data[i * k] == 0:
+                    data[i * k] = i
+            else:
+                break
+
+    for num in numbers:
+        primes = []
+        x = num
+        while 1 < x:
+            primes.append(data[x])
+            x //= data[x]
+        yield primes
+
+
 def n_combi_r_using_mod(n, r, mod):
     # 分子
     numerator = 1

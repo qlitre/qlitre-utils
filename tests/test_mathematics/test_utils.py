@@ -75,3 +75,12 @@ def test_prime_factorize():
 def test_n_combi_r_using_mod():
     assert utils.n_combi_r_using_mod(5, 2, 10 ** 9 + 7) == 10
     assert utils.n_combi_r_using_mod(5, 2, 7) == 3
+
+
+def test_generate_primes_fast():
+    a_list = [2, 6, 7, 12]
+    ret = list(utils.generate_primes_fast(a_list))
+    assert ret[0] == [2]
+    assert ret[1] == [2, 3]
+    assert ret[2] == [7]
+    assert ret[3] == [2, 2, 3]
