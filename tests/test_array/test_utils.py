@@ -56,3 +56,9 @@ def test_move_zeros_deque():
 def test_move_zeros_basic():
     a_list = [1, 2, 0, 3, 0, 4, 5]
     assert utils.move_zeros_deque(a_list) == [1, 2, 3, 4, 5, 0, 0]
+
+
+def test_generate_round_trip_value():
+    a_list = [1, 2, 3, 4]
+    ret = utils.generate_round_trip_value(a_list, 9)
+    assert list(ret) == [1, 2, 3, 4, 3, 2, 1, 2, 3]

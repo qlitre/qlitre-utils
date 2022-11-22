@@ -101,3 +101,23 @@ def move_zeros_basic(a_list):
                 a_list[index] = 0
             zero_index += 1
     return a_list
+
+
+def generate_round_trip_value(a_list: list, count: int):
+    """
+    配列を往復させて値をyieldして返す
+    """
+    a_list = deque(a_list)
+    n = -1
+    first = a_list[0]
+    last = a_list[-1]
+    for i in range(count):
+        ret = a_list[0]
+        if ret == first:
+            n = -1
+        if ret == last:
+            n = 1
+
+        a_list.rotate(n)
+
+        yield ret
