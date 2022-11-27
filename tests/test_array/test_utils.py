@@ -62,3 +62,12 @@ def test_generate_round_trip_value():
     a_list = [1, 2, 3, 4]
     ret = utils.generate_round_trip_value(a_list, 9)
     assert list(ret) == [1, 2, 3, 4, 3, 2, 1, 2, 3]
+
+
+def test_get_difference_sequence():
+    a_list = [1, 2, 3, 4]
+    ret = utils.get_difference_sequence(a_list)
+    assert ret == [1, 1, 1]
+    a_list = [1, -3, 2, 5]
+    ret = utils.get_difference_sequence(a_list)
+    assert ret == [-4, 5, 3]

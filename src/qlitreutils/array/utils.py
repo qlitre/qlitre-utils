@@ -121,3 +121,11 @@ def generate_round_trip_value(a_list: list, count: int):
         a_list.rotate(n)
 
         yield ret
+
+
+def get_difference_sequence(a_list: list) -> list:
+    """階差数列を返す"""
+    n = len(a_list)
+    if n < 2:
+        raise ValueError("要素は２つ必要")
+    return [a_list[i + 1] - a_list[i] for i in range(n - 1)]
