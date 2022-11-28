@@ -112,6 +112,14 @@ def get_lcm_multiple(*numbers) -> int:
     return reduce(get_lcm_using_math, numbers)
 
 
+def is_prime(n: int) -> bool:
+    """素数の場合Trueを返す"""
+    for i in range(2, int(pow(n, .5)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
 def prime_factorize(n: int) -> list:
     """素因数分解リストを返す"""
     if n == 1:

@@ -63,6 +63,13 @@ def test_get_lcm_multiple():
     assert utils.get_lcm_multiple(*numbers) == 120
 
 
+def test_is_prime():
+    assert utils.is_prime(3)
+    assert not utils.is_prime(4)
+    assert utils.is_prime(17)
+    assert utils.is_prime(23)
+
+
 def test_prime_factorize():
     ret = utils.prime_factorize(24)
     assert ret == [2, 2, 2, 3]
