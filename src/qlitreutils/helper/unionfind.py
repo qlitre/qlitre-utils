@@ -1,3 +1,7 @@
+"""
+ユニオンファインド問題のヘルパー
+"""
+
 from collections import defaultdict
 
 

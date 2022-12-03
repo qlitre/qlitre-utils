@@ -1,5 +1,7 @@
 """
 計算ユーティリティ
+主に配列を受け取って何らかの計算をして返す。
+例えば移動平均など
 """
 from collections import deque
 import itertools

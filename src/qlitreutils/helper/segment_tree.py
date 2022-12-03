@@ -1,3 +1,8 @@
+"""
+セグメントツリークラス
+"""
+
+
 class SegTree:
     def __init__(self, x_list, init, seg_func):
         self.init = init
