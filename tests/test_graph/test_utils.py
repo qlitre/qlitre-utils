@@ -53,3 +53,12 @@ def test_get_double_sweep():
     assert utils.get_double_sweep(data, 3, 1) == 2
     data = {1: [2], 2: [1, 3], 3: [2, 4, 5], 4: [3], 5: [3]}
     assert utils.get_double_sweep(data, 5, 1) == 3
+
+
+def test_bipartite_graph_separate_two_color():
+    data = {1: [3], 3: [1, 5, 6], 6: [3], 5: [3, 2], 2: [5, 4], 4: [2]}
+    group = utils.bipartite_graph_separate_two_color(data, 1)
+    g1 = sorted(group[0])
+    g2 = sorted(group[1])
+    assert g1 == [1, 4, 5, 6]
+    assert g2 == [2, 3]

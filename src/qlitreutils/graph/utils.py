@@ -113,3 +113,21 @@ def get_double_sweep(data: dict, n_vertex: int, start_vertex: int) -> int:
     max_node = a_max_item[1]
     ret = max_dist_and_node_using_bfs(max_node)
     return ret[0]
+
+
+def bipartite_graph_separate_two_color(graph: dict, start_vertex: int) -> list:
+    """２部グラフを隣接しない頂点に分けて返す"""
+    group = [[], []]
+    # 今いる頂点・一つ前の頂点・組(0 or 1)
+    que = [(start_vertex, start_vertex - 1, 0)]
+    while que:
+        vertex, past, color = que.pop()
+        group[color].append(vertex)
+        # 今いる頂点に隣接しているノードを見る
+        for i in graph[vertex]:
+            if i == past:
+                continue
+
+            que.append((i, vertex, color ^ 1))
+
+    return group
