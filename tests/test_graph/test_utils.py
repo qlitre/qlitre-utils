@@ -55,6 +55,53 @@ def test_get_double_sweep():
     assert utils.get_double_sweep(data, 5, 1) == 3
 
 
+def test_check_bipartite():
+    from collections import defaultdict
+
+    colors = defaultdict(int)
+    data = defaultdict(list)
+    """
+    3 1
+    2 0
+    4 1
+    2 1
+    """
+    data[3].append(1)
+    data[1].append(3)
+    data[2].append(0)
+    data[0].append(2)
+    data[4].append(1)
+    data[1].append(4)
+    data[2].append(1)
+    data[1].append(2)
+    flg, colors, group = utils.check_bipartite(data, colors, 0)
+    for k, v in group.items():
+        for vertex in v:
+            assert colors[vertex] == k
+
+    assert flg
+
+    # flg=Falseを検証
+    data = defaultdict(list)
+    colors = defaultdict(int)
+    """
+    2 0
+    2 1
+    0 1
+    """
+    data[2].append(0)
+    data[0].append(2)
+    data[2].append(1)
+    data[1].append(2)
+    data[0].append(1)
+    data[1].append(0)
+    flg, colors, group = utils.check_bipartite(data, colors, 0)
+    for k, v in group.items():
+        for vertex in v:
+            assert colors[vertex] == k
+    assert not flg
+
+
 def test_bipartite_graph_separate_two_color():
     data = {1: [3], 3: [1, 5, 6], 6: [3], 5: [3, 2], 2: [5, 4], 4: [2]}
     group = utils.bipartite_graph_separate_two_color(data, 1)

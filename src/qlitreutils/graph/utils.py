@@ -115,6 +115,29 @@ def get_double_sweep(data: dict, n_vertex: int, start_vertex: int) -> int:
     return ret[0]
 
 
+def check_bipartite(graph: dict, colors: dict, s_vertex: int):
+    """
+    :param graph:リストの辞書
+    :param colors:頂点毎に-1か1の辞書で管理
+    :param s_vertex:探索を始める頂点
+    :return:二部グラフかどうかの判定、更新したcolors、group
+    """
+    stack = deque([])
+    group = {1: [], -1: []}
+    stack.append([s_vertex, 1])
+    while stack:
+        now_vertex, color = stack.pop()
+        if colors[now_vertex] == 0:
+            group[color].append(now_vertex)
+            colors[now_vertex] = color
+            for to in graph[now_vertex]:
+                if colors[to] == color:
+                    return False, colors, group
+                if colors[to] == 0:
+                    stack.append([to, -1 * color])
+    return True, colors, group
+
+
 def bipartite_graph_separate_two_color(graph: dict, start_vertex: int) -> list:
     """２部グラフを隣接しない頂点に分けて返す"""
     group = [[], []]
