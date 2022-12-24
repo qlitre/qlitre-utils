@@ -79,6 +79,17 @@ def test_prime_factorize():
     assert ret == [13]
 
 
+def test_erasto_sieve():
+    ret = utils.erasto_sieve(5)
+    assert ret == [2, 3, 5]
+    ret = utils.erasto_sieve(1)
+    assert not ret
+    ret = utils.erasto_sieve(10)
+    assert ret == [2, 3, 5, 7]
+    ret = utils.erasto_sieve(0)
+    assert not ret
+
+
 def test_n_combi_r_using_mod():
     assert utils.n_combi_r_using_mod(5, 2, 10 ** 9 + 7) == 10
     assert utils.n_combi_r_using_mod(5, 2, 7) == 3

@@ -163,6 +163,24 @@ def generate_primes_fast(numbers: list):
         yield primes
 
 
+def erasto_sieve(n: int) -> list:
+    """
+    エラスとテネスのふるい
+    素数のリストを返す
+    """
+    if n < 1:
+        return []
+    primes = [True] * (n + 1)
+    primes[0] = False
+    primes[1] = False
+    for i in range(2, int(n ** 0.5) + 1):
+        if not primes[i]:
+            continue
+        for j in range(i * 2, n + 1, i):
+            primes[j] = False
+    return [i for i in range(n + 1) if primes[i]]
+
+
 def n_combi_r_using_mod(n, r, mod):
     # 分子
     numerator = 1
