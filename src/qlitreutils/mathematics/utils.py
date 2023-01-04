@@ -220,5 +220,8 @@ def power(a: int, b: int, mod: int, max_b: int) -> int:
 def division_using_mod(a: int, b: int, mod: int) -> int:
     """
     a÷b を m で割った余りを返す関数
+    Mを素数とし、bをMで割り切れない整数であるとする。
+    このときMで割った余りを求める問題では「÷b」を「x b**(m-2)」
+    と置き換えても計算結果は変わらない
     """
     return (a * power(b, mod - 2, mod, mod - 2)) % mod
