@@ -113,3 +113,28 @@ def test_power():
     a = 123456789
     b = 123456789012345678
     assert utils.power(a, b, mod, max_b) == 3599437
+
+
+def test_division_using_mod():
+    mod = 10 ** 9 + 7
+    a = 6
+    b = 3
+    assert utils.division_using_mod(a, b, mod) == 2
+    # 77777の組み合わせから44444選び方法
+    n = 77777
+    r = 44444
+    # 分子
+    a = 1
+    for i in range(1, n + 1):
+        a *= i
+        a = a % mod
+    # 分母
+    b = 1
+    for i in range(1, r + 1):
+        b *= i
+        b = b % mod
+    for i in range(1, n - r + 1):
+        b *= i
+        b = b % mod
+
+    assert utils.division_using_mod(a, b, mod) == 409085577

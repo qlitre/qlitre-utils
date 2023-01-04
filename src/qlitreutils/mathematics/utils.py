@@ -214,3 +214,11 @@ def power(a: int, b: int, mod: int, max_b: int) -> int:
             ret = (ret * p) % mod  # a の 2^i 乗が掛けられるとき
         p = (p * p) % mod
     return ret
+
+
+#
+def division_using_mod(a: int, b: int, mod: int) -> int:
+    """
+    a÷b を m で割った余りを返す関数
+    """
+    return (a * power(b, mod - 2, mod, mod - 2)) % mod
