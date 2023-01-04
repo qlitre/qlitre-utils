@@ -195,3 +195,22 @@ def n_combi_r_using_mod(n, r, mod):
     # 分母の逆元
     denominator_inverse_element = pow(denominator, -1, mod)
     return numerator * denominator_inverse_element % mod
+
+
+def power(a: int, b: int, mod: int, max_b: int) -> int:
+    """
+    a の b 乗を m で割った余りを返す関数
+    max_b:制約上のbの最大値
+    """
+    cnt = 1
+    while max_b > 1:
+        max_b //= 2
+        cnt += 1
+    p = a
+    ret = 1
+    for i in range(cnt):
+        wari = 2 ** i
+        if (b // wari) % 2 == 1:
+            ret = (ret * p) % mod  # a の 2^i 乗が掛けられるとき
+        p = (p * p) % mod
+    return ret

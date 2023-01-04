@@ -102,3 +102,14 @@ def test_generate_primes_fast():
     assert ret[1] == [2, 3]
     assert ret[2] == [7]
     assert ret[3] == [2, 2, 3]
+
+
+def test_power():
+    mod = 10 ** 9 + 7
+    a = 2
+    b = 3
+    max_b = 10 ** 18
+    assert utils.power(a, b, mod, max_b) == 8
+    a = 123456789
+    b = 123456789012345678
+    assert utils.power(a, b, mod, max_b) == 3599437
