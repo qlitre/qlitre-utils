@@ -216,7 +216,6 @@ def power(a: int, b: int, mod: int, max_b: int) -> int:
     return ret
 
 
-#
 def division_using_mod(a: int, b: int, mod: int) -> int:
     """
     a÷b を m で割った余りを返す関数
