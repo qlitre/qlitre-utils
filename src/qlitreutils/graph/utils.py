@@ -2,6 +2,7 @@
 グラフ問題のヘルパー
 """
 from collections import deque
+import heapq
 
 
 def get_connected_value_list(a_list: list, start_value) -> list:
@@ -154,3 +155,73 @@ def bipartite_graph_separate_two_color(graph: dict, start_vertex: int) -> list:
             que.append((i, vertex, color ^ 1))
 
     return group
+
+
+def dijkstra(n: int, graph: dict, start_vertex: int) -> list:
+    """
+    ダイクストラしてある地点からの最短距離のリストを返す
+    :param n: 頂点数
+    :param graph: 辞書 {頂点1:[(頂点2,cost),(頂点3,cost)...]}という形式
+    :param start_vertex:スタートする頂点
+    """
+    inf = 10 ** 18
+    cur = [inf] * (n + 1)
+    cur[start_vertex] = 0
+    vis = set()
+    que = [(0, start_vertex)]
+    heapq.heapify(que)
+    while len(que) >= 1:
+        pos = heapq.heappop(que)[1]
+        if pos in vis:
+            continue
+        vis.add(pos)
+
+        for adj, cost in graph.get(pos, []):
+            distance = cur[pos] + cost
+            if distance < cur[adj]:
+                cur[adj] = distance
+                heapq.heappush(que, (distance, adj))
+
+    return cur
+
+
+def get_dijkstra_root(n: int, graph: dict, start_vertex: int, end_vertex: int):
+    """
+    ダイクストラしてある地点からの最短距離の経路を返す
+    :param n: 頂点数
+    :param graph: 辞書 {頂点1:[(頂点2,cost),(頂点3,cost)...]}という形式
+    :param start_vertex:スタートする頂点
+    :param end_vertex:終了する頂点
+    """
+    inf = 10 ** 18
+    cur = [inf] * (n + 1)
+    cur[start_vertex] = 0
+    vis = set()
+    que = [(0, 1)]
+    heapq.heapify(que)
+    roots = [-1] * (n + 1)
+    while len(que) >= 1:
+        pos = heapq.heappop(que)[1]
+        if pos in vis:
+            continue
+        vis.add(pos)
+
+        for adj, cost in graph[pos]:
+            distance = cur[pos] + cost
+            if distance < cur[adj]:
+                cur[adj] = distance
+                heapq.heappush(que, (distance, adj))
+                roots[adj] = pos
+
+    # 復元処理
+    now = end_vertex
+    ret = [now]
+    while True:
+        nxt = roots[now]
+        ret.append(nxt)
+        if nxt == 1:
+            break
+        else:
+            now = nxt
+    ret.reverse()
+    return ret

@@ -109,3 +109,19 @@ def test_bipartite_graph_separate_two_color():
     g2 = sorted(group[1])
     assert g1 == [1, 4, 5, 6]
     assert g2 == [2, 3]
+
+
+def test_dijkstra():
+    n = 6
+    graph = {1: [(2, 15), (4, 20)], 2: [(1, 15), (3, 65), (5, 4)], 4: [(1, 20), (5, 30)], 3: [(2, 65), (6, 50)],
+             5: [(2, 4), (4, 30), (6, 8)], 6: [(3, 50), (5, 8)]}
+    dis = utils.dijkstra(n=n, graph=graph, start_vertex=1)
+    assert dis == [10 ** 18, 0, 15, 77, 20, 19, 27]
+
+
+def test_get_dijkstra_root():
+    n = 6
+    graph = {1: [(2, 15), (4, 20)], 2: [(1, 15), (3, 65), (5, 4)], 4: [(1, 20), (5, 30)], 3: [(2, 65), (6, 50)],
+             5: [(2, 4), (4, 30), (6, 8)], 6: [(3, 50), (5, 8)]}
+    root = utils.get_dijkstra_root(n=n, graph=graph, start_vertex=1, end_vertex=n)
+    assert root == [1, 2, 5, 6]
