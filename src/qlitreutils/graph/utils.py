@@ -197,7 +197,7 @@ def get_dijkstra_root(n: int, graph: dict, start_vertex: int, end_vertex: int):
     cur = [inf] * (n + 1)
     cur[start_vertex] = 0
     vis = set()
-    que = [(0, 1)]
+    que = [(0, start_vertex)]
     heapq.heapify(que)
     roots = [-1] * (n + 1)
     while len(que) >= 1:
@@ -219,7 +219,7 @@ def get_dijkstra_root(n: int, graph: dict, start_vertex: int, end_vertex: int):
     while True:
         nxt = roots[now]
         ret.append(nxt)
-        if nxt == 1:
+        if nxt == start_vertex:
             break
         else:
             now = nxt

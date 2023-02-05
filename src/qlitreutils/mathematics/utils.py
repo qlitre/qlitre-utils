@@ -82,11 +82,12 @@ def get_gcf_using_math(x: int, y: int) -> int:
 def get_lcm_using_math(x: int, y: int) -> int:
     """最小公倍数を返す"""
     product = x * y
-    return product // get_gcf_using_math(x, y)
+    return product // math.gcd(x, y)
 
 
 def get_lcm_simple(x: int, y: int) -> int:
     """最小公倍数を返す　mathを使わない版"""
+
     gcf = get_gcf_euclid(x, y)
     product = x * y
     return int(product / gcf)

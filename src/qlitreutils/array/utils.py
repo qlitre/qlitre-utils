@@ -55,3 +55,13 @@ def get_difference_sequence(a_list: list) -> list:
     if n < 2:
         raise ValueError("要素は２つ必要")
     return [a_list[i + 1] - a_list[i] for i in range(n - 1)]
+
+
+def count_inversion(a_list: list) -> int:
+    """転倒数を返す"""
+    count = 0
+    for i in range(len(a_list) - 1):
+        for j in range(i + 1, len(a_list)):
+            if a_list[i] > a_list[j]:
+                count += 1
+    return count
