@@ -87,9 +87,14 @@ def get_lcm_using_math(x: int, y: int) -> int:
 
 def get_lcm_simple(x: int, y: int) -> int:
     """最小公倍数を返す　mathを使わない版"""
-
-    gcf = get_gcf_euclid(x, y)
     product = x * y
+    if y == 0:
+        (x, y) = (y, x)
+
+    while y != 0:
+        (x, y) = (y, x % y)
+
+    gcf = x
     return int(product / gcf)
 
 
@@ -99,7 +104,6 @@ def get_gcf_multiple(*numbers) -> int:
     """
     if len(numbers) <= 1:
         raise ValueError('要素を２つ以上指定してください')
-
     return reduce(get_gcf_using_math, numbers)
 
 
@@ -225,3 +229,12 @@ def division_using_mod(a: int, b: int, mod: int) -> int:
     と置き換えても計算結果は変わらない
     """
     return (a * power(b, mod - 2, mod, mod - 2)) % mod
+
+
+def division_using_mod_pow(a: int, b: int, mod: int) -> int:
+    """
+    a÷b を m で割った余りを返す関数
+    組み込みのpowでバージョン3.8からシンプルに書けるようになった。
+    計算結果をxとすると、x * bをmodで割った余りがaになる点も留意する。
+    """
+    return (a * pow(b, mod - 2, mod)) % mod
