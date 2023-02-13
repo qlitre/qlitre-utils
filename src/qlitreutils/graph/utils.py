@@ -78,6 +78,46 @@ def get_can_visit(start, connected: dict, include_start: bool = False) -> list:
     return ret
 
 
+def get_tree_simple_path(n: int, graph: dict, start_vertex: int, end_vertex):
+    """頂点から頂点への単純パスを返す"""
+    vis = set()
+    que = deque()
+    vis.add(start_vertex)
+    que.append(start_vertex)
+    root = [-1] * (n + 1)
+
+    # 幅優先探索してルートを記録
+    while que:
+        now = que.popleft()
+        if now == end_vertex:
+            break
+        conn = graph[now]
+        for adj in conn:
+            if adj in vis:
+                continue
+            else:
+                vis.add(adj)
+                que.append(adj)
+                root[adj] = now
+
+    idx = end_vertex
+    ret = [end_vertex]
+    while True:
+        bef = root[idx]
+        if bef == start_vertex:
+            ret.append(start_vertex)
+            break
+        # たどり着けなかった
+        elif bef == -1:
+            return -1
+        else:
+            ret.append(bef)
+            idx = bef
+
+    ret.reverse()
+    return ret
+
+
 def get_double_sweep(data: dict, n_vertex: int, start_vertex: int) -> int:
     """
     :param data: 木構造データ

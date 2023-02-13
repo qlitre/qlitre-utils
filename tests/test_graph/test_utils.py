@@ -48,6 +48,16 @@ def test_get_can_visit():
     assert ret == [1, 2]
 
 
+def test_get_tree_simple_path():
+    graph = {3: [1], 1: [3, 2, 4], 2: [5, 1, 6], 5: [2], 4: [1], 6: [2]}
+    ret = utils.get_tree_simple_path(6, graph, 1, 2)
+    assert ret == [1, 2]
+
+    graph = {1: [2, 3], 2: [1], 3: [1, 4, 5], 4: [3], 5: [3]}
+    ret = utils.get_tree_simple_path(5, graph, 2, 5)
+    assert ret == [2, 1, 3, 5]
+
+
 def test_get_double_sweep():
     data = {1: [2], 2: [1, 3], 3: [2]}
     assert utils.get_double_sweep(data, 3, 1) == 2
