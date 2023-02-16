@@ -29,3 +29,20 @@ def test_cipher():
     s = 'vwxyz'
     encrypt = utils.cipher(s, key)
     assert encrypt == 'zabcd'
+
+
+def test_():
+    s = 'ABCU1234067'
+    assert utils.van_no_check_digit(s)
+    s = 'abcu1234067'
+    assert utils.van_no_check_digit(s)
+    s = 'abcu1234067'
+    assert utils.van_no_check_digit(s)
+    s = 'BEAU2427730'
+    assert utils.van_no_check_digit(s)
+    s = 'ABCU12340C7'
+    assert not utils.van_no_check_digit(s)
+    s = 'HOGE123456H'
+    assert not utils.van_no_check_digit(s)
+    s = 'AAA'
+    assert not utils.van_no_check_digit(s)
