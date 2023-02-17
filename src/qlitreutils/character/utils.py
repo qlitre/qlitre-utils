@@ -3,6 +3,7 @@
 """
 
 import string
+from itertools import groupby
 
 
 def is_anagram(s1: str, s2: str) -> bool:
@@ -80,3 +81,39 @@ def van_no_check_digit(van_no: str) -> bool:
     if ans >= 10:
         ans = int(str(ans)[-1])
     return int(van_no[-1]) == ans
+
+
+def run_length_encode(s: str) -> list:
+    """
+    RUN LENGTH ENCODING str -> list(tuple(str,int))
+    example) "aabbbbaaca" -> [('a', 2), ('b', 4), ('a', 2), ('c', 1), ('a', 1)]
+    """
+    grouped = groupby(s)
+    ret = []
+    for k, v in grouped:
+        elm = (k, len(list(v)))
+        ret.append(elm)
+    return ret
+
+
+def run_length_decode(a_list: list) -> str:
+    """
+    # RUN LENGTH DECODING list(tuple(str,int)) -> str
+    # example) [('a', 2), ('b', 4), ('a', 2), ('c', 1), ('a', 1)] -> "aabbbbaaca"
+    """
+    ret = ""
+    for c, n in a_list:
+        ret += c * int(n)
+    return ret
+
+
+def run_length_encode_to_string(s: str) -> str:
+    """
+    RUN LENGTH ENCODING str -> str
+    example) "aabbbbaaca" -> "a2b4a2c1a1"
+    """
+    grouped = groupby(s)
+    ret = ""
+    for k, v in grouped:
+        ret += k + str(len(list(v)))
+    return ret

@@ -46,3 +46,18 @@ def test_():
     assert not utils.van_no_check_digit(s)
     s = 'AAA'
     assert not utils.van_no_check_digit(s)
+
+
+def test_run_length_encode():
+    s = "aabbbbaaca"
+    assert utils.run_length_encode(s) == [('a', 2), ('b', 4), ('a', 2), ('c', 1), ('a', 1)]
+
+
+def test_run_length_decode():
+    a_list = [('a', 2), ('b', 4), ('a', 2), ('c', 1), ('a', 1)]
+    assert utils.run_length_decode(a_list) == "aabbbbaaca"
+
+
+def test_run_length_encode_to_string():
+    s = "aabbbbaaca"
+    assert utils.run_length_encode_to_string(s) == "a2b4a2c1a1"
