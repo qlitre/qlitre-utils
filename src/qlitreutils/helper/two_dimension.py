@@ -101,3 +101,10 @@ def get_max_manhattan_distance(points: list) -> int:
     y_dist_max = abs(max(y_conv) - min(y_conv))
 
     return max(x_dist_max, y_dist_max)
+
+
+def calc_triangle_area(x1, y1, x2, y2, x3, y3):
+    """3点の座標から三角形の面積を返す"""
+    a = (x2 - x1) * (y3 - y1)
+    b = (x3 - x1) * (y2 - y1)
+    return abs(a - b) / 2

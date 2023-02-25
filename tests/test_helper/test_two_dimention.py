@@ -81,3 +81,8 @@ def test_get_max_manhattan_distance():
     ]
     dist = two_dimension.get_max_manhattan_distance(points)
     assert dist == 4
+
+
+def test_calc_triangle_area():
+    area = two_dimension.calc_triangle_area(0, 0, 2, 0, 1, 2)
+    assert area == 2
