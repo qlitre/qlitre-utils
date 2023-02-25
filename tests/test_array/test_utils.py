@@ -36,3 +36,34 @@ def test_count_inversion():
     a_list = [4, 3, 2, 1]
     count = utils.count_inversion(a_list)
     assert count == 6
+
+
+def test_rotate_90():
+    data = [[1, 2, 3],
+            [4, 5, 6]]
+
+    assert utils.rotate_90(data, 1) == [[3, 6],
+                                        [2, 5],
+                                        [1, 4]]
+
+    assert utils.rotate_90(data, 2) == [[4, 5, 6], [1, 2, 3]]
+
+    assert utils.rotate_90(data, 3) == [[4, 1],
+                                        [5, 2],
+                                        [6, 3]]
+
+    assert utils.rotate_90(data, 4) == data
+
+    assert utils.rotate_90(data, 5) == [[3, 6],
+                                        [2, 5],
+                                        [1, 4]]
+
+    assert utils.rotate_90(data, 101) == [[3, 6],
+                                          [2, 5],
+                                          [1, 4]]
+
+    _data = data.copy()
+    # 4回やって元通りになるか
+    for i in range(4):
+        _data = utils.rotate_90(_data, 1)
+    assert _data == data
