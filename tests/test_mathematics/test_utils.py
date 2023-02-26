@@ -90,6 +90,11 @@ def test_erasto_sieve():
     assert not ret
 
 
+def test_n_combi_r():
+    assert utils.n_combi_r(4, 2) == 6
+    assert utils.n_combi_r(3, 3) == 1
+
+
 def test_n_combi_r_using_mod():
     assert utils.n_combi_r_using_mod(5, 2, 10 ** 9 + 7) == 10
     assert utils.n_combi_r_using_mod(5, 2, 7) == 3

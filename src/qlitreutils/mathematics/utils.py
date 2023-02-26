@@ -186,6 +186,19 @@ def erasto_sieve(n: int) -> list:
     return [i for i in range(n + 1) if primes[i]]
 
 
+def n_combi_r(n: int, r: int) -> int:
+    """n個からr個選ぶ組み合わせ数を返す"""
+    # 分子
+    numerator = 1
+    for i in range(n - r + 1, n + 1):
+        numerator *= i
+    # 分母　r の階乗
+    denominator = 1
+    for i in range(1, r + 1):
+        denominator *= i
+    return numerator // denominator
+
+
 def n_combi_r_using_mod(n, r, mod):
     # 分子
     numerator = 1
