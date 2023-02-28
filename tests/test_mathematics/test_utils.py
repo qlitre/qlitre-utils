@@ -1,4 +1,7 @@
 from src.qlitreutils.mathematics import utils
+import unittest
+
+assertions = unittest.TestCase('__init__')
 
 
 def test_base_10_to_base_n():
@@ -168,3 +171,8 @@ def test_division_using_mod_pow():
         b = b % mod
 
     assert utils.division_using_mod_pow(a, b, mod) == 409085577
+
+
+def test_cosine_law():
+    assert utils.cosine_law(3, 4, 90) == 5
+    assertions.assertAlmostEqual(utils.cosine_law(3, 4, 60), 3.60555127)

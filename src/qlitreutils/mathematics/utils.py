@@ -251,3 +251,13 @@ def division_using_mod_pow(a: int, b: int, mod: int) -> int:
     計算結果をxとすると、x * bをmodで割った余りがaになる点も留意する。
     """
     return (a * pow(b, mod - 2, mod)) % mod
+
+
+def cosine_law(a, b, degree):
+    """
+    余弦定理
+    辺a,bと間の角度が判明している際に、残りの１辺の長さを求める
+    """
+    radians = math.radians(degree)
+    ret = a ** 2 + b ** 2 - 2 * (a * b * math.cos(radians))
+    return pow(ret, 0.5)
