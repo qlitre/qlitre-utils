@@ -31,6 +31,17 @@ def test_get_divisor_list():
     assert utils_math.get_divisor_list(num) == ans
 
 
+def test_get_divisor_count():
+    num = 6
+    ans = [1, 2, 3, 6]
+    assert utils_math.get_divisor_count(num) == len(ans)
+    num = 1
+    assert utils_math.get_divisor_count(num) == 1
+    num = 40
+    ans = [1, 2, 4, 5, 8, 10, 20, 40]
+    assert utils_math.get_divisor_count(num) == len(ans)
+
+
 def test_get_gcf_simple():
     a, b = 12, 8
     assert utils_math.get_gcf_euclid(a, b) == 4

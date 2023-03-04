@@ -43,6 +43,25 @@ def get_divisor_list(num: int) -> list:
     return divisors
 
 
+def get_divisor_count(num: int) -> int:
+    """
+    約数の数を返す
+    つまり、A*BがNになるようなAとBの組み合わせの数
+    """
+    if num == 1:
+        return 1
+    ret = 0
+    max_num = int(pow(num, 0.5)) + 1
+    for n in range(1, max_num):
+        if num % n == 0:
+            ret += 1
+            div = num // n
+            if div != n:
+                ret += 1
+
+    return ret
+
+
 def get_gcf_simple(x: int, y: int) -> int:
     """最大公約数を返す。シンプルな実装"""
     if x < 0 or y < 0:
