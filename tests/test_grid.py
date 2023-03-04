@@ -1,4 +1,4 @@
-from src.qlitreutils.helper import grid
+from src.qlitreutils import grid
 
 
 def test_grid():

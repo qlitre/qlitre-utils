@@ -1,4 +1,4 @@
-from src.qlitreutils.helper import unionfind
+from src.qlitreutils import unionfind
 
 
 def test_unionfind_simple():

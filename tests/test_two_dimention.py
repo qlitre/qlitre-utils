@@ -1,4 +1,4 @@
-from src.qlitreutils.helper import two_dimension
+from src.qlitreutils import two_dimension
 
 
 def test_is_three_points_on_same_line():
