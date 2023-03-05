@@ -1,3 +1,7 @@
+"""
+数学問題のヘルパー関数
+"""
+
 import math
 from functools import reduce
 
