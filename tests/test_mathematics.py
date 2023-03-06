@@ -93,14 +93,14 @@ def test_prime_factorize():
     assert ret == [13]
 
 
-def test_erasto_sieve():
-    ret = mathematics.erasto_sieve(5)
+def test_eratos_sieve():
+    ret = mathematics.eratos_sieve(5)
     assert ret == [2, 3, 5]
-    ret = mathematics.erasto_sieve(1)
+    ret = mathematics.eratos_sieve(1)
     assert not ret
-    ret = mathematics.erasto_sieve(10)
+    ret = mathematics.eratos_sieve(10)
     assert ret == [2, 3, 5, 7]
-    ret = mathematics.erasto_sieve(0)
+    ret = mathematics.eratos_sieve(0)
     assert not ret
 
 

@@ -191,12 +191,12 @@ def generate_primes_fast(numbers: list):
         yield primes
 
 
-def erasto_sieve(n: int) -> list:
+def eratos_sieve(n: int) -> list:
     """
-    エラスとテネスのふるい
+    エラトステネスのふるい
     素数のリストを返す
     """
-    if n < 1:
+    if n <= 1:
         return []
     primes = [True] * (n + 1)
     primes[0] = False
