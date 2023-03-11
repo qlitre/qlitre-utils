@@ -123,6 +123,14 @@ def test_generate_primes_fast():
     assert ret[3] == [2, 2, 3]
 
 
+def test_get_primes_set():
+    assert mathematics.get_primes_set([2, 3, 4, 5, 6, 7, 8, 9, 10]) == {2, 3, 5, 7}
+    assert mathematics.get_primes_set([11, 13, 17, 19]) == {11, 13, 17, 19}
+    assert mathematics.get_primes_set([12, 15, 18, 21]) == {2, 3, 5, 7}
+    assert mathematics.get_primes_set([2, 2, 2, 2]) == {2}
+    assert mathematics.get_primes_set([3, 3, 3, 3]) == {3}
+
+
 def test_power():
     mod = 10 ** 9 + 7
     a = 2

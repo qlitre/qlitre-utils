@@ -191,6 +191,28 @@ def generate_primes_fast(numbers: list):
         yield primes
 
 
+def get_primes_set(numbers: list) -> set:
+    """数字のリストを受け取り、素因数のセットを返す"""
+    max_val = max(numbers)
+    data = [0] * (max_val + 1)
+    for i in range(2, max_val + 1):
+        if data[i] != 0:
+            continue
+        for k in range(1, max_val + 1):
+            if i * k < max_val + 1:
+                if data[i * k] == 0:
+                    data[i * k] = i
+            else:
+                break
+    primes = set()
+    for num in numbers:
+        x = num
+        while 1 < x:
+            primes.add(data[x])
+            x //= data[x]
+    return primes
+
+
 def eratos_sieve(n: int) -> list:
     """
     エラトステネスのふるい
