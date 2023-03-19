@@ -1,7 +1,6 @@
 """
 セグメントツリークラス
 """
-import typing
 
 
 class SegTree:
@@ -12,7 +11,7 @@ class SegTree:
     query(l, r): 区間[l, r)をsegfuncしたものを返す O(logN)
     """
 
-    def __init__(self, init_val, mode: typing.Literal['rmiq', 'rmaq', 'rsq', 'rpq', 'rgcdq']):
+    def __init__(self, init_val, mode):
         """
         init_val: 配列の初期値
         mode:
@@ -27,6 +26,8 @@ class SegTree:
         num: n以上の最小の2のべき乗
         tree: セグメント木(1-index)
         """
+        if mode not in ['rmiq', 'rmaq', 'rsq', 'rpq', 'rgcdq']:
+            raise ValueError('modeは rmiq, rmaq, rsq, rgcdq のいずれかを指定してください')
         n = len(init_val)
         self.seg_func = None
         if mode == 'rmiq':

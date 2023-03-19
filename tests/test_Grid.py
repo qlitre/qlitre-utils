@@ -1,4 +1,4 @@
-from src.qlitreutils import grid
+from src.qlitreutils.Grid import Grid
 
 
 def test_grid():
@@ -6,7 +6,7 @@ def test_grid():
             ['f', 'g', 'h', 'i', 'j'],
             ['k', 'l', 'm', 'n', 'o'],
             ['p', 'q', 'r', 's', 't']]
-    my_grid = grid.Grid(data)
+    my_grid = Grid(data)
     assert my_grid.height == 4
     assert my_grid.width == 5
     pos_row = 2
@@ -20,7 +20,7 @@ def test_grid():
             list("#....##"),
             list("#.....#"),
             list("...#...")]
-    my_grid = grid.Grid(data)
+    my_grid = Grid(data)
     pos_row = 2
     pos_col = 3
     assert my_grid.look_through_bottom(pos_row, pos_col, obstacle='#') == ['.']
