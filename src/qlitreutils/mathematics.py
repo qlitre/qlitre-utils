@@ -151,7 +151,7 @@ def is_prime(n: int) -> bool:
 def prime_factorize(n: int) -> list:
     """素因数分解リストを返す"""
     if n == 1:
-        return [1]
+        return []
     ret = []
     while n % 2 == 0:
         ret.append(2)

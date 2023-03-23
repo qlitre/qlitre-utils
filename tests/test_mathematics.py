@@ -88,7 +88,7 @@ def test_prime_factorize():
     ret = mathematics.prime_factorize(24)
     assert ret == [2, 2, 2, 3]
     ret = mathematics.prime_factorize(1)
-    assert ret == [1]
+    assert ret == []
     ret = mathematics.prime_factorize(13)
     assert ret == [13]
 
