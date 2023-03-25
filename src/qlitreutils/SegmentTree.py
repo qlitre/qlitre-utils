@@ -20,13 +20,14 @@ class SegTree:
             'rsq':区間和
             'rpq':区間積
             'rgcdq':区間最大公約数
+            'rxorsq':区間xor和
         segfunc: 区間にしたい操作
         ide_ele: 単位元
         n: 要素数
         num: n以上の最小の2のべき乗
         tree: セグメント木(1-index)
         """
-        if mode not in ['rmiq', 'rmaq', 'rsq', 'rpq', 'rgcdq']:
+        if mode not in ['rmiq', 'rmaq', 'rsq', 'rpq', 'rgcdq', 'rxorsq']:
             raise ValueError('modeは rmiq, rmaq, rsq, rgcdq のいずれかを指定してください')
         n = len(init_val)
         self.seg_func = None
@@ -44,6 +45,9 @@ class SegTree:
             self.ide_ele = 1
         elif mode == 'rgcdq':
             self.seg_func = self.seg_func_range_gcd
+            self.ide_ele = 0
+        elif mode == 'rxorsq':
+            self.seg_func = self.seg_func_range_xor_sum_query
             self.ide_ele = 0
 
         self.num = 1 << (n - 1).bit_length()
@@ -80,6 +84,14 @@ class SegTree:
         """区間最大公約数"""
         import math
         return math.gcd(x, y)
+
+    @staticmethod
+    def seg_func_range_xor_sum_query(x, y):
+        """区間xor和"""
+        return x ^ y
+
+    def select(self, k):
+        return self.tree[k + self.num]
 
     def update(self, k, x):
         """
