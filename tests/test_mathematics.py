@@ -195,3 +195,17 @@ def test_division_using_mod_pow():
 def test_cosine_law():
     assert mathematics.cosine_law(3, 4, 90) == 5
     assertions.assertAlmostEqual(mathematics.cosine_law(3, 4, 60), 3.60555127)
+
+
+def test_generate_lunlun_numbers():
+    # 最初の10個のルンルン数をテスト
+    first_10_lunlun_numbers = mathematics.generate_lunlun_numbers(10)
+    assert first_10_lunlun_numbers == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    # 最初の15個のルンルン数をテスト
+    first_20_lunlun_numbers = mathematics.generate_lunlun_numbers(20)
+    assert first_20_lunlun_numbers == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 32, 33, 34, 43, 44]
+
+    # 100000番目のルンルン数をテスト
+    lunlun_100000 = mathematics.generate_lunlun_numbers(100000)[-1]
+    assert lunlun_100000 == 3234566667
