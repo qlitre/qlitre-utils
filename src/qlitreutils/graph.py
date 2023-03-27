@@ -265,3 +265,31 @@ def get_dijkstra_root(n: int, graph: dict, start_vertex: int, end_vertex: int):
             now = nxt
     ret.reverse()
     return ret
+
+
+def topological_sort(n: int, graph: dict, into_num: list) -> list:
+    """
+    トポロジカルソートした配列を返す
+    トポロジカルソート出来なかった場合は空の配列を返す。
+    ※注意 now +1 して返す
+    :param n:頂点数
+    :param graph: {a:[b,c,d],e:[f]...}
+    :param into_num: 次数の配列
+    """
+    que = []
+    for i in range(n):
+        if into_num[i] == 0:
+            que.append(i)
+    ret = []
+    while que:
+        now = heapq.heappop(que)
+        ret.append(now + 1)
+        for adj in graph[now]:
+            into_num[adj] -= 1
+            if into_num[adj] == 0:
+                heapq.heappush(que, adj)
+
+    if len(ret) == n:
+        return ret
+    else:
+        return []

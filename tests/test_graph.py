@@ -1,4 +1,5 @@
 from src.qlitreutils import graph
+from collections import defaultdict
 
 
 def test_get_connected_value_list():
@@ -135,3 +136,37 @@ def test_get_dijkstra_root():
             5: [(2, 4), (4, 30), (6, 8)], 6: [(3, 50), (5, 8)]}
     root = graph.get_dijkstra_root(n=n, graph=data, start_vertex=1, end_vertex=n)
     assert root == [1, 2, 5, 6]
+
+
+def test_topological_sort():
+    _graph = defaultdict(list)
+
+    n = 4
+    into_num = [0] * n
+    edges = [
+        (2, 1),
+        (3, 4),
+        (2, 4),
+    ]
+    for a, b in edges:
+        a -= 1
+        b -= 1
+        _graph[a].append(b)
+        into_num[b] += 1
+    res = graph.topological_sort(n, _graph, into_num)
+    assert res == [2, 1, 3, 4]
+
+    n = 4
+    into_num = [0] * n
+    edges = [
+        (1, 2),
+        (1, 2),
+        (2, 1),
+    ]
+    for a, b in edges:
+        a -= 1
+        b -= 1
+        _graph[a].append(b)
+        into_num[b] += 1
+    res = graph.topological_sort(n, _graph, into_num)
+    assert res == []
