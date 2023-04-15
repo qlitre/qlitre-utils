@@ -3,6 +3,7 @@
 """
 from collections import deque
 import heapq
+from functools import lru_cache
 
 
 def get_connected_value_list(a_list: list, start_value) -> list:

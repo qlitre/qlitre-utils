@@ -1,4 +1,4 @@
-from src.qlitreutils.SegmentTree import SegTree
+from src.qlitreutils.datastructure.SegmentTree import SegTree
 
 
 def test_seg_tree():

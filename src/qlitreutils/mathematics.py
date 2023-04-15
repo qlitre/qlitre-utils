@@ -4,7 +4,6 @@
 
 import math
 from functools import reduce
-from collections import deque
 
 
 def base_10_to_base_n(num_10: int, n: int) -> int:
@@ -307,33 +306,3 @@ def cosine_law(a, b, degree):
     radians = math.radians(degree)
     ret = a ** 2 + b ** 2 - 2 * (a * b * math.cos(radians))
     return pow(ret, 0.5)
-
-
-def generate_lunlun_numbers(limit: int) -> list:
-    """
-    ルンルン数を小さい順に生成して返す。
-    ルンルン数=>正の整数X を(leading zeroなしで)十進数表記した際に、隣り合うどの2つの桁の値についても、差の絶対値が1以下
-    ex:
-    1234
-    1
-    334
-    """
-    ret = []
-    # 1桁のルンルン数をキューに入れる
-    que = deque(range(1, 10))
-
-    while len(ret) < limit:
-        cur_num = que.popleft()
-        ret.append(cur_num)
-        # 最後の桁の数字
-        last_digit = cur_num % 10
-        # 最後の桁から1を引いた数
-        if last_digit > 0:
-            que.append(cur_num * 10 + last_digit - 1)
-        # 最後の桁と同じ数
-        que.append(cur_num * 10 + last_digit)
-        # 最後の桁に1を足した数
-        if last_digit < 9:
-            que.append(cur_num * 10 + last_digit + 1)
-    ret.sort()
-    return ret

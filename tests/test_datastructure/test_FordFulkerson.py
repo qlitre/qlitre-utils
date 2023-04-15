@@ -1,4 +1,4 @@
-from src.qlitreutils.FordFulkerson import FordFulkerson
+from src.qlitreutils.datastructure.FordFulkerson import FordFulkerson
 
 
 def test_fordfulkerson():

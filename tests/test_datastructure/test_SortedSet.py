@@ -1,4 +1,4 @@
-from src.qlitreutils.SortedSet import SortedSet
+from src.qlitreutils.datastructure.SortedSet import SortedSet
 
 
 def test_init():

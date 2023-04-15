@@ -1,4 +1,4 @@
-from src.qlitreutils.Grid import Grid
+from src.qlitreutils.datastructure.Grid import Grid
 
 
 def test_grid():

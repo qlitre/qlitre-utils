@@ -1,4 +1,4 @@
-from src.qlitreutils.UnionFind import UnionFindSimple, UnionFindMultiple
+from src.qlitreutils.datastructure.UnionFind import UnionFindSimple, UnionFindMultiple
 
 
 def test_unionfind_simple():

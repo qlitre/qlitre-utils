@@ -1,4 +1,4 @@
-from src.qlitreutils.SortedMultiset import SortedMultiset
+from src.qlitreutils.datastructure.SortedMultiset import SortedMultiset
 
 
 def test_add_and_count():
