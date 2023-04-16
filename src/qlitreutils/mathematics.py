@@ -261,15 +261,12 @@ def n_combi_r_using_mod(n, r, mod):
     return numerator * denominator_inverse_element % mod
 
 
-def power(a: int, b: int, mod: int, max_b: int) -> int:
+def power(a: int, b: int, mod: int) -> int:
     """
     a の b 乗を m で割った余りを返す関数
     max_b:制約上のbの最大値
     """
-    cnt = 1
-    while max_b > 1:
-        max_b //= 2
-        cnt += 1
+    cnt = len(bin(b))-2
     p = a
     ret = 1
     for i in range(cnt):
@@ -287,7 +284,7 @@ def division_using_mod(a: int, b: int, mod: int) -> int:
     このときMで割った余りを求める問題では「÷b」を「x b**(m-2)」
     と置き換えても計算結果は変わらない
     """
-    return (a * power(b, mod - 2, mod, mod - 2)) % mod
+    return (a * power(b, mod - 2, mod)) % mod
 
 
 def division_using_mod_pow(a: int, b: int, mod: int) -> int:

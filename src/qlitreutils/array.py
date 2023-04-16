@@ -67,36 +67,18 @@ def count_inversion(a_list: list) -> int:
     return count
 
 
-def rotate_90(data, k=1):
+def rotate_90(data):
     """
     二次元配列を左周りに90度回転させる
     :param data: 二次元配列
-    :param k: 回転数
     :return: 回転後の二次元配列
     """
 
     h = len(data)
     w = len(data[0])
-    a_deg = 90 * k % 360
-    if a_deg == 90:
-        ret = [[None] * h for _ in range(w)]
-        for i in range(h):
-            row = data[i]
-            for j in range(w):
-                ret[j][i] = row[w - j - 1]
-        return ret
-    elif a_deg == 180:
-        ret = []
-        for i in range(h):
-            row = data[h - i - 1]
-            ret.append(row)
-        return ret
-    elif a_deg == 270:
-        ret = [[None] * h for _ in range(w)]
-        for i in range(h):
-            row = data[i]
-            for j in range(w):
-                ret[j][h - i - 1] = row[j]
-        return ret
-    else:
-        return data
+    ret = [[None] * h for _ in range(w)]
+    for i in range(h):
+        row = data[i]
+        for j in range(w):
+            ret[j][i] = row[w - j - 1]
+    return ret

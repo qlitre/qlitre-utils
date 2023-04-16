@@ -41,29 +41,19 @@ def test_count_inversion():
 def test_rotate_90():
     data = [[1, 2, 3],
             [4, 5, 6]]
+    ret = array.rotate_90(data)
+    assert ret == [[3, 6],
+                   [2, 5],
+                   [1, 4]]
 
-    assert array.rotate_90(data, 1) == [[3, 6],
-                                        [2, 5],
-                                        [1, 4]]
+    ret = array.rotate_90(ret)
+    assert ret == [[6, 5, 4],
+                   [3, 2, 1]]
 
-    assert array.rotate_90(data, 2) == [[4, 5, 6], [1, 2, 3]]
+    ret = array.rotate_90(ret)
+    assert ret == [[4, 1],
+                   [5, 2],
+                   [6, 3]]
 
-    assert array.rotate_90(data, 3) == [[4, 1],
-                                        [5, 2],
-                                        [6, 3]]
-
-    assert array.rotate_90(data, 4) == data
-
-    assert array.rotate_90(data, 5) == [[3, 6],
-                                        [2, 5],
-                                        [1, 4]]
-
-    assert array.rotate_90(data, 101) == [[3, 6],
-                                          [2, 5],
-                                          [1, 4]]
-
-    _data = data.copy()
-    # 4回やって元通りになるか
-    for i in range(4):
-        _data = array.rotate_90(_data, 1)
-    assert _data == data
+    ret = array.rotate_90(ret)
+    assert ret == data

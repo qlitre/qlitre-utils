@@ -135,11 +135,10 @@ def test_power():
     mod = 10 ** 9 + 7
     a = 2
     b = 3
-    max_b = 10 ** 18
-    assert mathematics.power(a, b, mod, max_b) == 8
+    assert mathematics.power(a, b, mod) == 8
     a = 123456789
     b = 123456789012345678
-    assert mathematics.power(a, b, mod, max_b) == 3599437
+    assert mathematics.power(a, b, mod) == 3599437
 
 
 def test_division_using_mod():
