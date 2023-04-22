@@ -294,3 +294,47 @@ def topological_sort(n: int, graph: dict, into_num: list) -> list:
         return ret
     else:
         return []
+
+
+def euler_tour(n: int, graph: dict, root: int):
+    """
+    :param n: 頂点数
+    :param graph: 2D matrix of N vertices given by the edges
+    :param root: 開始頂点のインデックス
+
+    :return tour: 訪問した頂点の順序
+    :return in_time: 各頂点の最初の訪問時刻
+    :return out_time: 各頂点の最後の訪問時刻
+
+    ex)
+    tour, in_time, out_time = euler_tour(n, graph, 0)
+    """
+
+    parent = [-1] * n
+    # postorder, preorder
+    stack = [~root, root]
+    curr_time = -1
+    tour = []
+    in_time = [-1] * n
+    out_time = [-1] * n
+    while stack:
+        curr_node = stack.pop()
+        curr_time += 1
+        # preorder
+        if curr_node >= 0:
+            tour.append(curr_node)
+            if in_time[curr_node] == -1:
+                in_time[curr_node] = curr_time
+
+            for next_node in graph[curr_node]:
+                if next_node != parent[curr_node]:
+                    parent[next_node] = curr_node
+                    stack.append(~next_node)
+                    stack.append(next_node)
+        # postorder
+        elif curr_node < 0:
+            out_time[~curr_node] = curr_time
+            if parent[~curr_node] != -1:
+                tour.append(parent[~curr_node])
+
+    return tour, in_time, out_time

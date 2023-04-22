@@ -170,3 +170,27 @@ def test_topological_sort():
         into_num[b] += 1
     res = graph.topological_sort(n, _graph, into_num)
     assert res == []
+
+
+def test_euler_tour():
+    # グラフの構築
+    _graph = {0: [3, 1], 3: [0], 1: [0, 4, 2], 4: [1], 2: [1]}
+    n = len(_graph)
+
+    # euler_tour関数の実行
+    tour, in_time, out_time = graph.euler_tour(n, _graph, 0)
+    # 結果の検証
+    assert tour == [0, 1, 2, 1, 4, 1, 0, 3, 0]
+    assert in_time == [0, 1, 2, 7, 4]
+    assert out_time == [9, 6, 3, 8, 5]
+
+    # グラフの構築
+    _graph = {0: [3, 1], 3: [0, 5], 1: [0, 4, 2], 4: [1], 2: [1], 5: [3]}
+    n = len(_graph)
+
+    # euler_tour関数の実行
+    tour, in_time, out_time = graph.euler_tour(n, _graph, 0)
+    # 結果の検証
+    assert tour == [0, 1, 2, 1, 4, 1, 0, 3, 5, 3, 0]
+    assert in_time == [0, 1, 2, 7, 4, 8]
+    assert out_time == [11, 6, 3, 10, 5, 9]
