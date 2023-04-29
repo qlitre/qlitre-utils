@@ -1,4 +1,5 @@
 from src.qlitreutils import array
+from typing import List
 
 
 def test_move_zeros_deque():
@@ -57,3 +58,72 @@ def test_rotate_90():
 
     ret = array.rotate_90(ret)
     assert ret == data
+
+
+def test_generate_zigzag_indices():
+    def check(_arr: List[List[int]], _expected: List[List[int]]):
+        result = array.generate_zigzag_indices(_arr)
+        assert result == _expected, f"Expected {expected}, but got {result}"
+
+        # Test case 1: 2x2 array
+        arr = [
+            [1, 2],
+            [3, 4]
+        ]
+        expected = [
+            [0, 0],
+            [0, 1],
+            [1, 1],
+            [1, 0]
+        ]
+        check(arr, expected)
+
+        # Test case 2: 3x3 array
+        arr = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ]
+        expected = [
+            [0, 0],
+            [0, 1],
+            [0, 2],
+            [1, 2],
+            [1, 1],
+            [1, 0],
+            [2, 0],
+            [2, 1],
+            [2, 2]
+        ]
+        check(arr, expected)
+
+        # Test case 3: 2x3 array
+        arr = [
+            [1, 2, 3],
+            [4, 5, 6]
+        ]
+        expected = [
+            [0, 0],
+            [0, 1],
+            [0, 2],
+            [1, 2],
+            [1, 1],
+            [1, 0]
+        ]
+        check(arr, expected)
+
+        # Test case 4: 3x2 array
+        arr = [
+            [1, 2],
+            [3, 4],
+            [5, 6]
+        ]
+        expected = [
+            [0, 0],
+            [0, 1],
+            [1, 1],
+            [2, 1],
+            [2, 0],
+            [1, 0]
+        ]
+        check(arr, expected)

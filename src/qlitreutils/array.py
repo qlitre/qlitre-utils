@@ -82,3 +82,31 @@ def rotate_90(data):
         for j in range(w):
             ret[j][i] = row[w - j - 1]
     return ret
+
+
+def generate_zigzag_indices(arr: list) -> list:
+    """
+    二次元配列に対して、ジグザグに要素にアクセスするためのインデックスのリストを生成する。
+    :param arr: 二次元配列（リストのリスト）
+    :return: ジグザグに要素にアクセスするための行と列のインデックスのリスト（リストのリスト）
+    """
+    h = len(arr)
+    w = len(arr[0])
+    ret = []
+    r, c = 0, 0
+    di_right = True
+    for _ in range(h * w):
+        ret.append([r, c])
+        if di_right:
+            if c < w - 1:
+                c += 1
+            else:
+                r += 1
+                di_right = False
+        else:
+            if c > 0:
+                c -= 1
+            else:
+                r += 1
+                di_right = True
+    return ret
