@@ -338,3 +338,21 @@ def euler_tour(n: int, graph: dict, root: int):
                 tour.append(parent[~curr_node])
 
     return tour, in_time, out_time
+
+
+def warshall_floyd(cost):
+    """
+    隣接行列で表現されたグラフにワーシャル・フロイド法を適用し、
+    すべての頂点ペア間の最短距離を計算して返す。
+    :param cost :List[List[int]] グラフの隣接行列。頂点 i から頂点 j までの距離またはコストを表す。
+                cost[i][j] が inf の場合、頂点 i と頂点 j の間に直接的な接続がないことを示す。
+    :return:List[List[int]]: すべての頂点ペア間の最短距離を計算した後の隣接行列。
+    """
+
+    num_vertices = len(cost)
+
+    for mid_k in range(num_vertices):
+        for start_i in range(num_vertices):
+            for end_j in range(num_vertices):
+                cost[start_i][end_j] = min(cost[start_i][end_j], cost[start_i][mid_k] + cost[mid_k][end_j])
+    return cost

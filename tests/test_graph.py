@@ -194,3 +194,38 @@ def test_euler_tour():
     assert tour == [0, 1, 2, 1, 4, 1, 0, 3, 5, 3, 0]
     assert in_time == [0, 1, 2, 7, 4, 8]
     assert out_time == [11, 6, 3, 10, 5, 9]
+
+
+def test_warshall_floyd():
+    inf = float('inf')
+    cost = [
+        [0, 5, 7, inf, inf],
+        [5, 0, 2, 4, inf],
+        [7, 2, 0, 1, inf],
+        [inf, 4, 1, 0, 3],
+        [inf, inf, inf, 3, 0]
+    ]
+    expected = [
+        [0, 5, 7, 8, 11],
+        [5, 0, 2, 3, 6],
+        [7, 2, 0, 1, 4],
+        [8, 3, 1, 0, 3],
+        [11, 6, 4, 3, 0]
+    ]
+    result = graph.warshall_floyd(cost)
+    assert result == expected
+
+    cost = [
+        [0, 1, inf, inf],
+        [1, 0, 1, inf],
+        [inf, 1, 0, 1],
+        [inf, inf, 1, 0]
+    ]
+    expected = [
+        [0, 1, 2, 3],
+        [1, 0, 1, 2],
+        [2, 1, 0, 1],
+        [3, 2, 1, 0]
+    ]
+    result = graph.warshall_floyd(cost)
+    assert result == expected
