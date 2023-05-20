@@ -87,3 +87,12 @@ def get_all_sum_pair_in_list(a_list: list, target: int) -> list:
         return ret_list
 
     return helper(0, [], [], target)
+
+
+def count_sum_pairs(n, k):
+    """
+    (a,b)であって、
+    1≤a,b≤n かつ
+    a+b=k を満たすものの個数
+    """
+    return min(k - 1, (2 * n) + 1 - k)

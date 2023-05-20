@@ -37,3 +37,29 @@ def test_get_all_sum_pair_in_list():
     ret = calculation.get_all_sum_pair_in_list(a_list, target)
     assert [1, 4] in ret
     assert [2, 3] in ret
+
+
+def test_count_sum_pairs():
+    # 例: n=5, k=7
+    assert calculation.count_sum_pairs(5, 7) == 4
+    # (1, 6), (2, 5), (3, 4), (4, 3) の4組が条件を満たす
+
+    # 例: n=10, k=12
+    assert calculation.count_sum_pairs(10, 12) == 9
+    # (1, 11), (2, 10), (3, 9), ..., (9, 3), (10, 2) の9組が条件を満たす
+
+    # 例: n=8, k=5
+    assert calculation.count_sum_pairs(8, 5) == 4
+    # (1, 4), (2, 3), (3, 2), (4, 1) の4組が条件を満たす
+
+    # 例: n=3, k=3
+    assert calculation.count_sum_pairs(3, 3) == 2
+    # (1, 2), (2, 1) の2組が条件を満たす
+
+    # 例: n=1, k=1
+    assert calculation.count_sum_pairs(1, 1) == 0
+    # 条件を満たす組が存在しないため、0を返す
+
+    # 例: n=6, k=11
+    assert calculation.count_sum_pairs(6, 11) == 2
+    # (5, 6), (6, 5) の2組が条件を満たす
