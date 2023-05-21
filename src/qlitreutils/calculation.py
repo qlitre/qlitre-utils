@@ -96,3 +96,12 @@ def count_sum_pairs(n, k):
     a+b=k を満たすものの個数
     """
     return min(k - 1, (2 * n) + 1 - k)
+
+
+def max_subarray_sum(arr):
+    max_current = max_global = arr[0]
+    for i in range(1, len(arr)):
+        max_current = max(arr[i], max_current + arr[i])
+        if max_current > max_global:
+            max_global = max_current
+    return max_global

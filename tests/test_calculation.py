@@ -63,3 +63,12 @@ def test_count_sum_pairs():
     # 例: n=6, k=11
     assert calculation.count_sum_pairs(6, 11) == 2
     # (5, 6), (6, 5) の2組が条件を満たす
+
+
+def test_max_subarray_sum():
+    assert calculation.max_subarray_sum([1, -3, 2, 1, -1]) == 3
+    assert calculation.max_subarray_sum([2, -3, 4, -1, -2, 1, 5, -3]) == 7
+    assert calculation.max_subarray_sum([-2, -3, 4, -1, -2, 1, 5, -3]) == 7
+    assert calculation.max_subarray_sum([-1, -2, -3, -4, -5]) == -1
+    assert calculation.max_subarray_sum([1, 2, 3, 4, 5]) == 15
+    assert calculation.max_subarray_sum([0, 0, 0, 0, 0]) == 0
