@@ -1,14 +1,12 @@
 from array import array
 from bisect import bisect_left
-from typing import List, Union, Literal
 
 
 class SortedArraySet:
 
-    def __init__(self, an_iterable: Union[List[int], List[float], List[str]],
-                 array_type=Literal['int', 'float', 'str']):
+    def __init__(self, an_iterable: list,
+                 array_type: str = 'int'):
         an_iterable.sort()
-
         if array_type == 'int':
             self.arr = array('i', an_iterable)
         elif array_type == 'float':
