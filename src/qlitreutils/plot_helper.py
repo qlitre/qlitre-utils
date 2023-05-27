@@ -13,12 +13,12 @@ def plot_graph_by_dict(data: dict, n: int, start_one: bool = True, directed: boo
 
     for i in range(n):
         if start_one:
-            graph.add_node(i + 1)
+            add_node(i + 1)
         else:
-            graph.add_node(i)
+            add_node(i)
     for node, edges in data.items():
         for edge in edges:
-            graph.add_edge(node, edge)
+            add_edge(node, edge)
     fig, ax = plt.subplots()
     nx.draw(graph, with_labels=True)
     fig.tight_layout()
@@ -36,12 +36,12 @@ def plot_graph_by_connected_list(data: list, n: int, start_one: bool = True, dir
 
     for i in range(n):
         if start_one:
-            graph.add_node(i + 1)
+            add_node(i + 1)
         else:
-            graph.add_node(i)
+            add_node(i)
     for node in range(len(data)):
         for edge in data[node]:
-            graph.add_edge(node, edge)
+            add_edge(node, edge)
 
     fig, ax = plt.subplots()
     nx.draw(graph, with_labels=True)

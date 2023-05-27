@@ -217,7 +217,7 @@ def dijkstra(n: int, graph: dict, start_vertex: int) -> list:
             continue
         vis.add(pos)
 
-        for adj, cost in graph.get(pos, []):
+        for adj, cost in graph[pos]:
             distance = cur[pos] + cost
             if distance < cur[adj]:
                 cur[adj] = distance
