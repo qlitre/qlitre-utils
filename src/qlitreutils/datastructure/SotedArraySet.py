@@ -30,6 +30,8 @@ class SortedArraySet:
 
     def lt(self, x):
         idx = bisect_left(self.arr, x)
+        if idx == len(self.arr):
+            return self.arr[-1]
         for i in range(idx, -1, -1):
             if self.arr[i] < x:
                 return self.arr[i]
@@ -37,6 +39,8 @@ class SortedArraySet:
 
     def le(self, x):
         idx = bisect_left(self.arr, x)
+        if idx == len(self.arr):
+            return self.arr[-1]
         for i in range(idx, -1, -1):
             if self.arr[i] <= x:
                 return self.arr[i]

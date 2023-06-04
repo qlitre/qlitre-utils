@@ -30,11 +30,15 @@ def test_discard():
 def test_lt():
     s = SortedArraySet([3, 1, 2], 'int')
     assert s.lt(2) == 1
+    assert s.lt(3) == 2
     assert s.lt(1) is None
+    assert s.lt(4) == 3
 
 
 def test_le():
     s = SortedArraySet([3, 1, 2], 'int')
+    assert s.le(4) == 3
+    assert s.le(3) == 3
     assert s.le(2) == 2
     assert s.le(1) == 1
     assert s.le(0) is None
@@ -42,12 +46,14 @@ def test_le():
 
 def test_gt():
     s = SortedArraySet([3, 1, 2], 'int')
+    assert s.gt(0) == 1
     assert s.gt(2) == 3
     assert s.gt(3) is None
 
 
 def test_ge():
     s = SortedArraySet([3, 1, 2], 'int')
+    assert s.ge(0) == 1
     assert s.ge(2) == 2
     assert s.ge(3) == 3
     assert s.ge(4) is None
