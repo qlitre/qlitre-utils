@@ -14,6 +14,25 @@ class SortedArrayMultiSet:
         elif array_type == 'str':
             self.arr = array('u', an_iterable)
 
+    def __getitem__(self, x: int):
+        if x < 0:
+            if x < -1 * len(self.arr):
+                raise IndexError
+        else:
+            if x >= len(self.arr):
+                raise IndexError
+        return self.arr[x]
+
+    def __contains__(self, x) -> bool:
+        if len(self.arr) == 0:
+            return False
+        i = bisect_left(self.arr, x)
+        if i >= len(self.arr):
+            return False
+        if self.arr[i] != x:
+            return False
+        return True
+
     def add(self, x):
         idx = bisect_left(self.arr, x)
         self.arr.insert(idx, x)
