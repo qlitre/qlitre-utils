@@ -93,20 +93,12 @@ def generate_zigzag_indices(arr: list) -> list:
     h = len(arr)
     w = len(arr[0])
     ret = []
-    r, c = 0, 0
-    di_right = True
-    for _ in range(h * w):
-        ret.append([r, c])
-        if di_right:
-            if c < w - 1:
-                c += 1
-            else:
-                r += 1
-                di_right = False
+    for i in range(h):
+        if i % 2 == 0:
+            for j in range(w):
+                ret.append([i, j])
         else:
-            if c > 0:
-                c -= 1
-            else:
-                r += 1
-                di_right = True
+            for j in reversed(range(w)):
+                ret.append([i, j])
+
     return ret
