@@ -53,3 +53,46 @@ def gen_increasing_seq(length: int, limit: int) -> list:
                 que.append((al + [i], depth + 1))
 
     return ret
+
+
+def find_all_groupings(idx, group, n, group_count) -> list:
+    """
+    指定された総数nとグループの総数を元に、
+    深さ優先探索（DFS）を用いて全ての可能なグループ分けを返す。
+    条件：
+    各indexは1つのグループに入る
+    各グループには少なくとも一つのインデックスが入る
+
+    引数:
+    p (int): 現在の選手のインデックス。
+    group (list): 現在の選手のグループ。
+    n (int): 選手の総数。
+    group_count (int): 希望するグループの総数。
+
+    戻り値:
+    list: 全ての可能なグループ分けのリスト。
+    """
+    # pがnに達し、group_countを満たしている場合groupを返す
+    if idx == n:
+        if len(group) == group_count:
+            return [group]
+    else:
+        ret = []
+        for j in range(len(group)):
+            new_group = []
+            for k in range(len(group)):
+                if k == j:
+                    # pをgroup jに追加
+                    new_group.append(group[k] | {idx})
+                else:
+                    # pが加わらないgroupはそのまま
+                    new_group.append(group[k].copy())
+            # 探索をすすめる
+            ret += find_all_groupings(idx + 1, new_group, n, group_count)
+        # group数が満たなかった
+        if len(group) < group_count:
+            # 新しいグループを作り、pをそのグループに追加
+            new_group = group + [{idx}]
+            ret += find_all_groupings(idx + 1, new_group, n, group_count)
+        return ret
+    return []
