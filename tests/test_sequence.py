@@ -55,23 +55,31 @@ def test_find_all_groupings():
 
     # テストケース1: 2人の選手を2つのグループに分ける
     result1 = find_all_groupings(0, [], 2, 2)
-    expected1 = [[{0}, {1}]]
+    expected1 = [[[0], [1]]]
     assert sorted(result1) == sorted(expected1)
 
     # テストケース2: 3人の選手を2つのグループに分ける
     result2 = find_all_groupings(0, [], 3, 2)
-    expected2 = [[{0, 1}, {2}], [{0, 2}, {1}], [{0}, {1, 2}]]
+    expected2 = [[[0, 1], [2]], [[0, 2], [1]], [[0], [1, 2]]]
     assert sorted(result2) == sorted(expected2)
 
     # テストケース3: 3人の選手を3つのグループに分ける
     result3 = find_all_groupings(0, [], 3, 3)
-    expected3 = [[{0}, {1}, {2}]]
+    expected3 = [[[0], [1], [2]]]
     assert sorted(result3) == sorted(expected3)
 
     # テストケース4: 4人の選手を2つのグループに分ける
     result4 = find_all_groupings(0, [], 4, 2)
-    expected4 = [[{0, 1, 2}, {3}], [{0, 1, 3}, {2}], [{0, 1}, {2, 3}], [{0, 2, 3}, {1}], [{0, 2}, {1, 3}],
-                 [{0, 3}, {1, 2}], [{0}, {1, 2, 3}]]
+    expected4 = [
+        [[0, 1, 2], [3]],
+        [[0, 1, 3], [2]],
+        [[0, 1], [2, 3]],
+        [[0, 2, 3], [1]],
+        [[0, 2], [1, 3]],
+        [[0, 3], [1, 2]],
+        [[0], [1, 2, 3]]
+    ]
+    print(result4)
     assert sorted(result4) == sorted(expected4)
 
 
