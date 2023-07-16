@@ -9,20 +9,20 @@ from collections import deque
 @lru_cache(maxsize=None)
 def gen_seq_within_sum_limit_and_length(remain: int, depth: int, length: int) -> list:
     """
-        深さ優先探索を使用して、長さlengthで足してremain以下の数列を生成する。
-        depthは1を指定する。
-        Args:
-            remain (int): 生成する数列の合計がremain以下である必要がある。
-            depth (int): 現在の深さ。再帰的に呼び出されるたびに、depthは1ずつ増加する。
-            length (int): 生成する数列の長さ。
+    深さ優先探索を使用して、長さlengthで足してremain以下の数列を生成する。
+    depthは1を指定する。
+    Args:
+        remain (int): 生成する数列の合計がremain以下である必要がある。
+        depth (int): 現在の深さ。再帰的に呼び出されるたびに、depthは1ずつ増加する。
+        length (int): 生成する数列の長さ。
 
-        Returns:
-            List[List[int]]: 長さlengthで足してremain以下の数列のリスト。
+    Returns:
+        List[List[int]]: 長さlengthで足してremain以下の数列のリスト。
 
-        Example:
-            remain=5,length=3
-            [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [3, 1, 1]]
-        """
+    Example:
+        remain=5,length=3
+        [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [3, 1, 1]]
+    """
     if remain <= 0:
         return []
     if depth == 0:
@@ -96,3 +96,47 @@ def find_all_groupings(idx: int, group: list, n: int, group_count: int) -> list:
             ret += find_all_groupings(idx + 1, new_group, n, group_count)
         return ret
     return []
+
+
+def generate_pairs(lst):
+    """
+    与えられたリストの要素（人間）を2人1組に分ける全ての組み合わせを生成する関数。
+    これは再帰的な方法でペアを生成します。
+
+    Parameters
+    ----------
+    lst : list
+        人間のリスト。各人間は一意であると仮定します。
+
+    Returns
+    -------
+    all_pairs : list of list of tuple
+        人間を2人1組に分ける全ての組み合わせ。各組み合わせは、人間のペア（タプル）のリストとして表されます。
+
+    Example
+    --------
+    >>> generate_pairs(['A', 'B', 'C', 'D'])
+    [[('A', 'B'), ('C', 'D')], [('A', 'C'), ('B', 'D')], [('A', 'D'), ('B', 'C')]]
+    """
+    if len(lst) < 2:
+        return []
+    if len(lst) == 2:
+        return [[(lst[0], lst[1])]]
+
+    # すべてのペアを格納するリスト
+    all_pairs = []
+
+    # 先頭の要素（1つ目の人）を取り出す
+    first = lst[0]
+
+    # 先頭の要素とペアになる要素（2つ目以降の人）を繰り返し取り出す
+    for i in range(1, len(lst)):
+        # 先頭の要素とi番目の要素のペアを作る
+        pair = (first, lst[i])
+
+        # 残りの要素から再帰的にペアを生成する
+        rest = lst[1:i] + lst[i + 1:]
+        for p in generate_pairs(rest):
+            all_pairs.append([pair] + p)
+
+    return all_pairs

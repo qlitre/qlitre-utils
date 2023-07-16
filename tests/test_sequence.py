@@ -1,4 +1,6 @@
-from src.qlitreutils.sequence import gen_seq_within_sum_limit_and_length, gen_increasing_seq, find_all_groupings
+from src.qlitreutils.sequence import (gen_seq_within_sum_limit_and_length, gen_increasing_seq, find_all_groupings,
+                                      generate_pairs)
+import pytest
 
 
 def test_generate_sequences_within_sum_limit_and_length():
@@ -71,3 +73,33 @@ def test_find_all_groupings():
     expected4 = [[{0, 1, 2}, {3}], [{0, 1, 3}, {2}], [{0, 1}, {2, 3}], [{0, 2, 3}, {1}], [{0, 2}, {1, 3}],
                  [{0, 3}, {1, 2}], [{0}, {1, 2, 3}]]
     assert sorted(result4) == sorted(expected4)
+
+
+def test_generate_pairs():
+    # 入力が2つの要素のみを含むリストの場合
+    assert generate_pairs(['A', 'B']) == [[('A', 'B')]]
+
+    # 入力が4つの要素を含むリストの場合
+    assert generate_pairs(['A', 'B', 'C', 'D']) == [
+        [('A', 'B'), ('C', 'D')],
+        [('A', 'C'), ('B', 'D')],
+        [('A', 'D'), ('B', 'C')]
+    ]
+
+    # 入力が空のリストの場合
+    assert generate_pairs([]) == []
+
+    # 入力が1つの要素を含むリストの場合
+    assert generate_pairs(['A']) == []
+
+
+@pytest.mark.parametrize('lst', [
+    ['A', 'B', 'C'],
+    ['A', 'B', 'C', 'D', 'E'],
+    ['A', 'B', 'C', 'D', 'E', 'F']
+])
+def test_generate_pairs_length(lst):
+    # 全ての出力がlen(lst) // 2 長のタプルのリストであることを確認
+    for pairs in generate_pairs(lst):
+        assert all(len(pair) == 2 for pair in pairs)
+        assert len(pairs) == len(lst) // 2
