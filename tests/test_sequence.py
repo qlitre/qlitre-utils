@@ -1,4 +1,5 @@
-from src.qlitreutils.sequence import (gen_seq_within_sum_limit_and_length, gen_increasing_seq, find_all_groupings,
+from src.qlitreutils.sequence import (gen_seq_within_sum_limit_and_length, gen_increasing_seq, gen_decreasing_seq,
+                                      find_all_groupings,
                                       generate_pairs)
 import pytest
 
@@ -47,6 +48,15 @@ def test_gen_increasing_seq():
     assert gen_increasing_seq(3, 1) == [
         [1, 1, 1],
     ]
+
+
+def test_gen_decreasing_seq():
+    assert gen_decreasing_seq(1, 3) == [[3], [2], [1]]
+    assert gen_decreasing_seq(2, 3) == [[3, 2], [3, 1], [2, 1]]
+    assert gen_decreasing_seq(3, 3) == [[3, 2, 1]]
+    assert gen_decreasing_seq(4, 3) == []
+    assert gen_decreasing_seq(0, 3) == []
+    assert gen_decreasing_seq(3, 0) == []
 
 
 def test_find_all_groupings():

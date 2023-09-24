@@ -49,7 +49,27 @@ def gen_increasing_seq(length: int, limit: int) -> list:
             ret.append(al)
         else:
             last = al[-1]
+
             for i in range(last, limit + 1):
+                que.append((al + [i], depth + 1))
+
+    return ret
+
+
+def gen_decreasing_seq(length: int, limit: int) -> list:
+    ret = []
+    que = deque()
+    for i in range(limit, 0, -1):
+        que.append(([i], 1))
+
+    while que:
+        al, depth = que.popleft()
+        if depth == length:
+            ret.append(al)
+        else:
+            last = al[-1]
+            # 0を含める場合はrange(last - 1, -1, -1)とする
+            for i in range(last - 1, 0, -1):
                 que.append((al + [i], depth + 1))
 
     return ret
