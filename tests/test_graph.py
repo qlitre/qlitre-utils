@@ -1,54 +1,7 @@
-from src.qlitreutils.graph import (get_connected_value_list, count_can_visit, get_can_visit, get_tree_simple_path,
+from src.qlitreutils.graph import (get_tree_simple_path,
                                    get_double_sweep, check_bipartite, bipartite_graph_separate_two_color, dijkstra,
                                    get_dijkstra_root, topological_sort, euler_tour, warshall_floyd)
 from collections import defaultdict
-
-
-def test_get_connected_value_list():
-    a_list = [(1, 2), (1, 3), (3, 6), (4, 5)]
-    return_list = get_connected_value_list(a_list, 1)
-    assert return_list == [1, 2, 3, 6]
-    return_list = get_connected_value_list(a_list, 3)
-    return_list.sort()
-    assert return_list == [1, 2, 3, 6]
-    a_list = [(1, 2), (1, 3), (3, 6), (4, 5), (6, 7, 8), (9,)]
-    return_list = get_connected_value_list(a_list, 3)
-    return_list.sort()
-    assert return_list == [1, 2, 3, 6, 7, 8]
-
-
-def test_count_can_visit():
-    data = {1: [2], 2: [3], 3: [4], 4: [1]}
-    ans = 0
-    for k in data.keys():
-        ans += count_can_visit(start=k, connected=data, include_start=True)
-    assert ans == 16
-    ans = 0
-    for k in data.keys():
-        ans += count_can_visit(start=k, connected=data, include_start=False)
-    assert ans == 12
-
-
-def test_get_can_visit():
-    data = {1: [2], 2: [1], 3: [4], 4: [1, 2]}
-    ret = get_can_visit(start=1, connected=data, include_start=True)
-    ret.sort()
-    assert ret == [1, 2]
-    ret = get_can_visit(start=2, connected=data, include_start=False)
-    ret.sort()
-    assert ret == [1]
-    ret = get_can_visit(start=3, connected=data, include_start=True)
-    ret.sort()
-    assert ret == [1, 2, 3, 4]
-    ret = get_can_visit(start=3, connected=data, include_start=False)
-    ret.sort()
-    assert ret == [1, 2, 4]
-    ret = get_can_visit(start=4, connected=data, include_start=True)
-    ret.sort()
-    assert ret == [1, 2, 4]
-    ret = get_can_visit(start=4, connected=data, include_start=False)
-    ret.sort()
-    assert ret == [1, 2]
 
 
 def test_get_tree_simple_path():
