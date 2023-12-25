@@ -1,7 +1,7 @@
 """
 グラフ問題のヘルパー
 """
-from collections import deque
+from collections import deque, defaultdict
 import heapq
 
 
@@ -264,6 +264,40 @@ def euler_tour(n: int, graph: dict, root: int):
                 tour.append(parent[~curr_node])
 
     return tour, in_time, out_time
+
+
+def count_subtree(graph: dict, start_vertex: int) -> dict:
+    """
+    隣接リストで表されるグラフと開始頂点が与えられたとき、この関数は各頂点のサブツリーに含まれる頂点の数を計算します。
+    この関数はスタックを使用した深さ優先探索（DFS）アルゴリズムを用いてグラフを走査し、
+    各頂点を根とするサブツリーに含まれる頂点の数をカウントして辞書に格納します。
+    パラメータ:
+    graph (dict): グラフを表す辞書。キーは頂点の識別子（整数）で、値は隣接する頂点のリストです。
+    start_vertex (int): DFS走査を開始する頂点。
+    戻り値:
+    dict: キーがグラフの頂点、値がその頂点を根とするサブツリーに含まれる頂点の数を表す辞書。
+         各頂点は自身のサブツリーのカウントに含まれます。
+
+   例:
+   グラフが {1: [2, 3], 2: [1, 4], 3: [1], 4: [2]} で、start_vertex = 1 の場合、
+   関数は {0: 4, 1: 4, 2: 2, 3: 1, 4: 1} を返します。
+   """
+    stack = [(start_vertex - 1, start_vertex, True)]
+    ret = defaultdict(lambda: 1)
+    vis = set()
+    vis.add(start_vertex)
+    while stack:
+        pre, now, f = stack.pop()
+        if f:
+            for adj in graph[now]:
+                if pre == adj or adj in vis:
+                    continue
+                vis.add(adj)
+                stack.append((now, adj, False))
+                stack.append((now, adj, True))
+        else:
+            ret[pre] += ret[now]
+    return ret
 
 
 def warshall_floyd(cost):

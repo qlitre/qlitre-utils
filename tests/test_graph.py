@@ -1,6 +1,7 @@
 from src.qlitreutils.graph import (get_tree_simple_path,
                                    get_double_sweep, check_bipartite, bipartite_graph_separate_two_color, dijkstra,
-                                   get_dijkstra_root, topological_sort, euler_tour, warshall_floyd)
+                                   get_dijkstra_root, topological_sort, euler_tour, count_subtree,
+                                   warshall_floyd)
 from collections import defaultdict
 
 
@@ -149,6 +150,45 @@ def test_euler_tour():
     assert tour == [0, 1, 2, 1, 4, 1, 0, 3, 5, 3, 0]
     assert in_time == [0, 1, 2, 7, 4, 8]
     assert out_time == [11, 6, 3, 10, 5, 9]
+
+
+def test_count_subtree():
+    def check(d1: dict, d2: dict) -> bool:
+        for k1, v1 in d1.items():
+            if d2[k1] != v1:
+                return False
+            if k1 not in d2:
+                return False
+        for k2, v2 in d2.items():
+            if d1[k2] != v2:
+                return False
+            if k2 not in d2:
+                return False
+        return True
+
+    graph = defaultdict(list)
+    assert count_subtree(graph, 1) == defaultdict(lambda: 1, {})
+    graph = defaultdict(list)
+    graph[1] = []
+    assert count_subtree(graph, 1) == defaultdict(lambda: 1, {})
+    graph = defaultdict(list)
+    graph[1].append(2)
+    graph[2].append(3)
+    expected = defaultdict(lambda: 1, {1: 3, 2: 2, 3: 1})
+    assert check(count_subtree(graph, 1), expected)
+    graph = defaultdict(list)
+    graph[1] = [2, 3]
+    graph[2] = [4, 5]
+    graph[3] = [6, 7]
+    expected = defaultdict(lambda: 1, {1: 7, 2: 3, 3: 3, 4: 1, 5: 1, 6: 1, 7: 1})
+    assert check(count_subtree(graph, 1), expected)
+    graph = defaultdict(list)
+    graph[1] = [2]
+    graph[2] = [3]
+    graph[3] = [1]
+
+    expected = defaultdict(lambda: 1, {1: 3, 2: 2, 3: 1})
+    assert check(count_subtree(graph, 1), expected)
 
 
 def test_warshall_floyd():
