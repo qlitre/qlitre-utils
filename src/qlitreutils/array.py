@@ -3,6 +3,7 @@
 """
 
 from collections import deque
+from bisect import bisect_left
 
 
 def move_zeros_deque(a_list: list):
@@ -102,3 +103,18 @@ def generate_zigzag_indices(arr: list) -> list:
                 ret.append([i, j])
 
     return ret
+
+
+def get_lis(a_list: list) -> list:
+    n = len(a_list)
+    dp = [0] * n
+    lis = []
+    for i in range(n):
+        num = a_list[i]
+        pos = bisect_left(lis, num)
+        dp[i] = pos + 1
+        if pos == len(lis):
+            lis.append(num)
+        else:
+            lis[pos] = num
+    return dp

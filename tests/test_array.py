@@ -1,11 +1,13 @@
-from src.qlitreutils.array import \
-    move_zeros_deque, \
-    move_zeros_basic, \
-    generate_round_trip_value, \
-    count_inversion, \
-    rotate_90, \
-    generate_zigzag_indices, \
-    get_difference_sequence
+from src.qlitreutils.array import (
+    move_zeros_deque,
+    move_zeros_basic,
+    generate_round_trip_value,
+    count_inversion,
+    rotate_90,
+    generate_zigzag_indices,
+    get_difference_sequence,
+    get_lis
+)
 from typing import List
 
 
@@ -134,3 +136,16 @@ def test_generate_zigzag_indices():
         [2, 1],
     ]
     check(arr, expected)
+
+
+def test_get_lis():
+    al = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+    expect = [1, 2, 1, 3, 2, 4, 4, 5, 6]
+    assert get_lis(al) == expect
+    al = [3, 10, 2, 1, 20]
+    expect = [1, 2, 1, 1, 3]
+    assert get_lis(al) == expect
+    al = [3, 2]
+    expect = [1, 1]
+    assert get_lis(al) == expect
+    assert get_lis([]) == []
