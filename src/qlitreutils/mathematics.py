@@ -266,7 +266,7 @@ def power(a: int, b: int, mod: int) -> int:
     a の b 乗を m で割った余りを返す関数
     max_b:制約上のbの最大値
     """
-    cnt = len(bin(b))-2
+    cnt = len(bin(b)) - 2
     p = a
     ret = 1
     for i in range(cnt):
@@ -333,4 +333,24 @@ def generate_lunlun_numbers(limit: int) -> list:
         if last_digit < 9:
             que.append(cur_num * 10 + last_digit + 1)
     ret.sort()
+    return ret
+
+
+def count_set_bits_at_position(n: int, j: int) -> int:
+    """
+    jビット目が1である0からnまでの整数の個数を計算して返す。
+    :param:
+       j (int): 調べるビット位置（0始まり）。
+       n (int): 範囲の上限（0からnまでの整数を含む）。
+    :return
+    int: 0からnまでの範囲で、jビット目が1である整数の個数。
+   """
+    ret = 0
+    p2 = 2 ** j
+    seg_size = p2 * 2
+    cnt = n // seg_size
+    ret += cnt * p2
+    rem = n % seg_size
+    if rem >= p2:
+        ret += (rem - p2 + 1)
     return ret

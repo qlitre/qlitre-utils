@@ -4,7 +4,7 @@ from src.qlitreutils.mathematics import (base_10_to_base_n, base_n_to_base_10, g
                                          get_gcf_multiple, is_prime, prime_factorize, eratos_sieve, n_combi_r,
                                          n_combi_r_using_mod, generate_primes_fast, get_primes_set, power,
                                          division_using_mod, division_using_mod_pow, cosine_law,
-                                         generate_lunlun_numbers)
+                                         generate_lunlun_numbers, count_set_bits_at_position)
 
 assertions = unittest.TestCase('__init__')
 
@@ -213,3 +213,25 @@ def test_generate_lunlun_numbers():
     # 100000番目のルンルン数をテスト
     lunlun_100000 = generate_lunlun_numbers(100000)[-1]
     assert lunlun_100000 == 3234566667
+
+
+class TestCountSetBitsAtPosition(unittest.TestCase):
+    def test_basic_cases(self):
+        self.assertEqual(count_set_bits_at_position(20, 2), 9)
+        self.assertEqual(count_set_bits_at_position(10, 0), 5)
+        self.assertEqual(count_set_bits_at_position(10, 1), 5)
+        self.assertEqual(count_set_bits_at_position(20, 3), 8)
+        self.assertEqual(count_set_bits_at_position(0, 2), 0)
+
+    def test_edge_cases(self):
+        self.assertEqual(count_set_bits_at_position(0, 0), 0)
+        self.assertEqual(count_set_bits_at_position(1, 0), 1)
+        self.assertEqual(count_set_bits_at_position(1, 1), 0)
+        self.assertEqual(count_set_bits_at_position(2, 1), 1)
+        self.assertEqual(count_set_bits_at_position(3, 1), 2)
+
+    def test_large_cases(self):
+        self.assertEqual(count_set_bits_at_position(1023, 10), 0)
+        self.assertEqual(count_set_bits_at_position(1024, 10), 1)
+        self.assertEqual(count_set_bits_at_position(1048575, 20), 0)
+        self.assertEqual(count_set_bits_at_position(1048576, 20), 1)
