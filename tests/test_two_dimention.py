@@ -1,6 +1,7 @@
 from src.qlitreutils.two_dimension import (is_three_points_on_same_line, get_length_between_two_points,
                                            check_square_by_line, get_square_point, get_center_point, get_rotate_point,
-                                           get_max_manhattan_distance, calc_triangle_area)
+                                           get_max_manhattan_distance, calc_triangle_area, cross_product,
+                                           argument_sort)
 import math
 from pytest import approx
 
@@ -108,3 +109,22 @@ def test_get_max_manhattan_distance():
 def test_calc_triangle_area():
     area = calc_triangle_area(0, 0, 2, 0, 1, 2)
     assert area == 2
+
+
+def test_cross_product():
+    assert cross_product((1, 0), (0, 1)) == 1
+    assert cross_product((0, 1), (1, 0)) == -1
+    assert cross_product((2, 2), (1, 1)) == 0
+
+
+def test_argument_sort():
+    points = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
+    expected = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1)]
+    assert argument_sort(points) == expected
+    # atan2 の順序と一致する
+    points = [(x, y) for x in range(-3, 4) for y in range(-3, 4) if (x, y) != (0, 0)]
+    ret = argument_sort(points)
+    angles = [-math.pi if y == 0 and x < 0 else math.atan2(y, x) for x, y in ret]
+    assert angles == sorted(angles)
+    # 同じ偏角は元の順序を保ち、原点は先頭
+    assert argument_sort([(2, 2), (0, 0), (1, 1)]) == [(0, 0), (2, 2), (1, 1)]

@@ -3,6 +3,7 @@
 """
 import itertools
 import math
+from functools import cmp_to_key
 from math import cos, sin
 
 
@@ -108,3 +109,41 @@ def calc_triangle_area(x1, y1, x2, y2, x3, y3):
     a = (x2 - x1) * (y3 - y1)
     b = (x3 - x1) * (y2 - y1)
     return abs(a - b) / 2
+
+
+def cross_product(point1: tuple, point2: tuple) -> int:
+    """原点を始点とする2ベクトルの外積を返す 正なら point2 は point1 から反時計回り側"""
+    return point1[0] * point2[1] - point1[1] * point2[0]
+
+
+def _arg_half(point: tuple) -> int:
+    """偏角ソート用の領域番号 0: 原点 1: 下半平面(x軸負方向を含む) 2: 上半平面(x軸正方向を含む)"""
+    x, y = point[0], point[1]
+    if x == 0 and y == 0:
+        return 0
+    if y < 0 or (y == 0 and x < 0):
+        return 1
+    return 2
+
+
+def _arg_compare(point1: tuple, point2: tuple) -> int:
+    h1 = _arg_half(point1)
+    h2 = _arg_half(point2)
+    if h1 != h2:
+        return -1 if h1 < h2 else 1
+    cross = cross_product(point1, point2)
+    if cross > 0:
+        return -1
+    if cross < 0:
+        return 1
+    return 0
+
+
+def argument_sort(points: list) -> list:
+    """
+    整数座標の点を偏角でソートした新しいリストを返す
+    atan2 と同じ順序で x軸負方向(-π)から反時計回りに並ぶ 原点は先頭
+    同じ偏角の点の順序は元の順序を保つ
+    外積のみで比較するため誤差が出ない
+    """
+    return sorted(points, key=cmp_to_key(_arg_compare))
